@@ -56,8 +56,13 @@ class MainActivity : AppCompatActivity() {
         this.fragmentsShow("FragmentStart")
     }
 
-    fun testClick(v: View) {
-        val fragmentStart = fragments["FragmentStart"] as FragmentStart
-        fragmentStart.redrawSensorButtons()
+    fun testClickAdd(v: View) {
+        (application as SOApplication).sensorContainer.testAdd()
+
+
+    }
+
+    fun testClickChange(v: View) {
+        (application as SOApplication).sensorContainer.testAdd()
     }
 }

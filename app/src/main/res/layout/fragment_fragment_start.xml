@@ -4,7 +4,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.FragmentStart"
+             tools:context=".MainActivity"
 >
 
     <ScrollView
@@ -12,7 +12,7 @@
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/button0"
             tools:layout_editor_absoluteX="20dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
 
@@ -31,12 +31,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:id="@+id/button"
+            android:id="@+id/button0"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
-            android:onClick="testClick"/>
+            android:onClick="testClickAdd"/>
+
+    <Button
+            android:text="Change sensors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button1"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button0"
+            android:layout_marginStart="8dp"
+            android:onClick="testClickChange"/>
 
 
 </android.support.constraint.ConstraintLayout>
