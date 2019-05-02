@@ -46,7 +46,7 @@ class SensorContainer {
                 layoutScrollContainer?.addView(newButton)
             }
         }
-
+        layoutScrollContainer?.invalidate()
     }
 
     fun testChange() {
