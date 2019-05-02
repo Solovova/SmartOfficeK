@@ -27,7 +27,7 @@ class SensorContainer {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            for (i in 1..30) {
+            for (i in 1..10) {
                 val newButton = SensorButton(layoutScrollContainer.context)
                 newButton.setText("Name $i")
                 params.setMargins(10, 40, 10, 40)
