@@ -19,34 +19,24 @@ class SensorContainer {
     }
 
     fun testAdd() {
-        Log.i("Added","Start" )
-
-        if (layoutScrollContainer?.childCount != 0 ) layoutScrollContainer?.removeAllViews()
-
-        var params: LinearLayout.LayoutParams  = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
-        val myContext = layoutScrollContainer?.context
-        Log.i("Added","Startpp" )
-        if (myContext != null) {
-            Log.i("Added","Starttt" )
-            for (i in 1..3) {
-                val newButton = SensorButton(myContext)
+        Log.i("Added", "Start")
+        val layoutScrollContainer = this.layoutScrollContainer
+        if (layoutScrollContainer != null) {
+            if (layoutScrollContainer.childCount > 0) layoutScrollContainer.removeAllViews()
+            var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            for (i in 1..30) {
+                val newButton = SensorButton(layoutScrollContainer.context)
                 newButton.setText("Name $i")
-
-                params.setMargins(10, 10, 10, 10)
+                params.setMargins(10, 40, 10, 40)
                 newButton.layoutParams = params
-
-//                newButton.setOnClickListener(View.OnClickListener {
-//                    // your handler code here
-//                    (activity as MainActivity).fragmentsShow("FragmentRoom")
-//                })
-                Log.i("Added","Name $i" )
-                layoutScrollContainer?.addView(newButton)
+                Log.i("Added", "Name $i")
+                layoutScrollContainer.addView(newButton)
             }
+            layoutScrollContainer.invalidate()
         }
-        layoutScrollContainer?.invalidate()
     }
 
     fun testChange() {
