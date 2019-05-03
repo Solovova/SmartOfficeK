@@ -2,9 +2,11 @@ package com.example.smartoffice.service
 
 import android.app.Application
 import android.view.View
+import android.widget.LinearLayout
 import com.example.smartoffice.R
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.soviews.SensorButton
+import com.example.smartoffice.soviews.SensorIndicatorButton
 
 class Sensor {
     var indicators = mutableListOf<SensorIndicator>()
@@ -12,6 +14,7 @@ class Sensor {
     var sensorName: String = ""
     private var sensorButton: SensorButton? = null
     private var fragmentSensor: FragmentSensor? = null
+    private var sensorIndicatorContainer: LinearLayout? = null
 
 
     constructor(_sensorID: String) {
@@ -28,17 +31,33 @@ class Sensor {
         sensorButton.setSensor(this)
     }
 
-    fun setLinkToFragmentSensor(_fragmentSensor: FragmentSensor){
+    fun setLinkToFragmentSensor(_fragmentSensor: FragmentSensor, _sensorIndicatorContainer: LinearLayout){
         // its call from onViewCreate of FragmentSensor
-        if (this.fragmentSensor != _fragmentSensor) {
+        if (this.fragmentSensor != _fragmentSensor || this.sensorIndicatorContainer != _sensorIndicatorContainer) {
             this.fragmentSensor = _fragmentSensor
-            this.recreateSensorIndicatorButton()
+            this.sensorIndicatorContainer = _sensorIndicatorContainer
+            _fragmentSensor.setSensor(this)
+            this.createSensorIndicatorButton()
         }
     }
 
-    private fun recreateSensorIndicatorButton(){
-        //ToDo create a indicators in
-
+    private fun createSensorIndicatorButton(){
+        val sensorIndicatorContainer = this.sensorIndicatorContainer
+        if (sensorIndicatorContainer != null) {
+            if (sensorIndicatorContainer.childCount > 0) sensorIndicatorContainer.removeAllViews()
+            var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            for (indicator in indicators) {
+                val newButtonIndicator = SensorIndicatorButton(sensorIndicatorContainer.context)
+                params.setMargins(10, 30, 10, 30)
+                newButtonIndicator.layoutParams = params
+                sensorIndicatorContainer.addView(newButtonIndicator)
+                indicator.setLinkToSensorIndicatorButton(newButtonIndicator)
+            }
+            sensorIndicatorContainer.invalidate()
+        }
     }
 
     fun testGenerateData(testSensorIndicatorType : Array<enIndicatorType>?) {

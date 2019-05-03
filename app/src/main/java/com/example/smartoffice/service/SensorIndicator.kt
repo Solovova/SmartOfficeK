@@ -1,12 +1,15 @@
 package com.example.smartoffice.service
 
+import com.example.smartoffice.soviews.SensorIndicatorButton
 import java.util.*
 
 
 class SensorIndicator  {
     private var indicatorValue: Double = 0.0
     private var alarmRange: DoubleArray = doubleArrayOf(0.0, 0.0)
-    private var type: enIndicatorType
+    var type: enIndicatorType
+
+    private var sensorIndicatorButton: SensorIndicatorButton? = null
 
     constructor(_type: enIndicatorType) {
         type = _type
@@ -29,5 +32,12 @@ class SensorIndicator  {
 
     fun nextTestData() {
 
+    }
+
+    fun setLinkToSensorIndicatorButton(_sensorIndicatorButton: SensorIndicatorButton) {
+        if (this.sensorIndicatorButton !=_sensorIndicatorButton) {
+            this.sensorIndicatorButton = _sensorIndicatorButton
+            _sensorIndicatorButton.setSensorIndicator(this)
+        }
     }
 }

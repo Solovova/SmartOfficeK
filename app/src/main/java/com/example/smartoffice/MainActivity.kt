@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             ft.add(R.id.container, fragment, fragmentName)
         }
         ft.show(fragment)
-        ft.addToBackStack(null)
 
         ft.commit()
         //supportFragmentManager.executePendingTransactions()
@@ -76,18 +75,9 @@ class MainActivity : AppCompatActivity() {
         this.fragmentsShow("FragmentStart")
     }
 
-    fun testClickAdd(v: View) {
-        Log.i("SHOW","${v.id}")
-        //(application as SOApplication).sensorContainer.testAdd()
-    }
-
-    fun testClickChange(v: View) {
-        Log.i("SHOW","${v.id}")
-        //(application as SOApplication).sensorContainer.testAdd()
-    }
-
     override fun onBackPressed() {
         val fragmentName:String = this.getActiveFragments()
+        Log.i("SHOW Back press", fragmentName)
         if (fragmentName.startsWith("FragmentSensor")) {
             this.showStartScreen()
         }else{

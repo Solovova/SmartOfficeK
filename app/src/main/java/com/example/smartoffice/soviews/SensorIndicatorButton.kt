@@ -20,8 +20,17 @@ class SensorIndicatorButton: ConstraintLayout  {
 
     }
 
-    fun setSensor(_sensorIndicator: SensorIndicator) {
-        this.sensorIndicator = _sensorIndicator
-        //textMain.text = _sensorIndicator.
+    private fun refreshAll() {
+        val sensorIndicator = this.sensorIndicator
+        if (sensorIndicator != null) {
+            this.textMain.text = sensorIndicator.type.toString()
+        }
+    }
+
+    fun setSensorIndicator(_sensorIndicator: SensorIndicator) {
+        if (this.sensorIndicator != _sensorIndicator) {
+            this.sensorIndicator = _sensorIndicator
+            this.refreshAll()
+        }
     }
 }
