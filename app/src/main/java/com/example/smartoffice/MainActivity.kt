@@ -2,7 +2,6 @@ package com.example.smartoffice
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
@@ -10,7 +9,6 @@ import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.service.Sensor
-import com.example.smartoffice.soviews.SensorButton
 
 class MainActivity : AppCompatActivity() {
     var fragments = mutableMapOf<String, Fragment>()
@@ -79,10 +77,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testClickAdd(v: View) {
+        Log.i("SHOW","${v.id}")
         //(application as SOApplication).sensorContainer.testAdd()
     }
 
     fun testClickChange(v: View) {
+        Log.i("SHOW","${v.id}")
         //(application as SOApplication).sensorContainer.testAdd()
     }
 
