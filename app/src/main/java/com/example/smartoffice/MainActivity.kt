@@ -57,12 +57,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testClickAdd(v: View) {
-        (application as SOApplication).sensorContainer.testAdd()
+        //(application as SOApplication).sensorContainer.testAdd()
 
 
     }
 
     fun testClickChange(v: View) {
-        (application as SOApplication).sensorContainer.testAdd()
+        //(application as SOApplication).sensorContainer.testAdd()
     }
 }

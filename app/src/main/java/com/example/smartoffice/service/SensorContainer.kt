@@ -15,11 +15,13 @@ class SensorContainer {
     }
 
     fun setLayoutScrollContainer (linearLayout: LinearLayout) {
-        this.layoutScrollContainer = linearLayout
+        if (this.layoutScrollContainer != linearLayout) {
+            this.layoutScrollContainer = linearLayout
+            this.recreateSensorButtons()
+        }
     }
 
-    fun testAdd() {
-        Log.i("Added", "Start")
+    private fun recreateSensorButtons(){
         val layoutScrollContainer = this.layoutScrollContainer
         if (layoutScrollContainer != null) {
             if (layoutScrollContainer.childCount > 0) layoutScrollContainer.removeAllViews()
@@ -27,19 +29,52 @@ class SensorContainer {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            for (i in 1..50) {
-                val newButton = SensorButton(layoutScrollContainer.context)
-                newButton.setText("Name $i")
-                params.setMargins(10, 40, 10, 40)
-                newButton.layoutParams = params
-                Log.i("Added", "Name $i")
-                layoutScrollContainer.addView(newButton)
+            for (id in  sensors.keys) {
+                val sensor: Sensor? = sensors[id]
+                if (sensor != null){
+                    val newButton = SensorButton(layoutScrollContainer.context)
+                    sensor.setLinkToView(newButton)
+                    params.setMargins(10, 20, 10, 20)
+                    newButton.layoutParams = params
+                    //Log.i("Added", sensor.sensorName)
+                    layoutScrollContainer.addView(newButton)
+                }
             }
             layoutScrollContainer.invalidate()
         }
+
     }
 
-    fun testChange() {
+    fun testGenerateData() {
+        val testSensorID: Array<String> = arrayOf("id123432", "id999797", "id999997")
+        val testSensorName: Array<String> = arrayOf("Room 8", "Room 2", "Room 7")
 
+        var testSensorIndicator = mutableMapOf<String,Array<enIndicatorType>>()
+        testSensorIndicator[testSensorID[0]] = arrayOf(
+            enIndicatorType.Temperature,
+            enIndicatorType.Brightness,
+            enIndicatorType.Co2,
+            enIndicatorType.Humidity
+            )
+
+        testSensorIndicator[testSensorID[1]] = arrayOf(
+            enIndicatorType.Temperature,
+            enIndicatorType.Humidity
+        )
+
+        testSensorIndicator[testSensorID[2]] = arrayOf(
+            enIndicatorType.Temperature,
+            enIndicatorType.Humidity,
+            enIndicatorType.Brightness
+        )
+
+
+        var sensor: Sensor?
+        for (ind in 0 until testSensorID.size) {
+            sensor = Sensor(testSensorID[ind])
+            sensor.setName(testSensorName[ind])
+            sensor.testGenerateData(testSensorIndicator[testSensorID[ind]])
+            sensors[testSensorID[ind]] = sensor
+        }
     }
 }

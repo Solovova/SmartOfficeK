@@ -22,4 +22,12 @@ class SensorIndicator  {
     fun setIndicatorVal(_value: Double){
         this.indicatorValue = _value
     }
+
+    fun testGenerateData() {
+
+    }
+
+    fun nextTestData() {
+
+    }
 }
