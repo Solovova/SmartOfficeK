@@ -1,35 +1,31 @@
 package com.example.smartoffice.service
 
 import android.app.Application
-import android.util.Log
-import android.view.View
 import android.widget.LinearLayout
 import com.example.smartoffice.soviews.SensorButton
-import com.example.smartoffice.MainActivity
-
 
 
 class SensorContainer {
     var sensors = mutableMapOf<String,Sensor>()
-    private var layoutScrollContainer : LinearLayout? = null
+    private var viewContainer : LinearLayout? = null
 
     var app: Application? = null
     constructor(_app: Application){
         this.app = _app
     }
 
-    fun setLayoutScrollContainer (linearLayout: LinearLayout) {
+    fun setViewContainer (_viewContainer: LinearLayout) {
         // its call from onViewCreate of FragmentStart
-        if (this.layoutScrollContainer != linearLayout) {
-            this.layoutScrollContainer = linearLayout
-            this.recreateSensorButtons()
+        if (this.viewContainer != _viewContainer) {
+            this.viewContainer = _viewContainer
+            this.createSensorButtons()
         }
     }
 
-    private fun recreateSensorButtons(){
-        val layoutScrollContainer = this.layoutScrollContainer
-        if (layoutScrollContainer != null) {
-            if (layoutScrollContainer.childCount > 0) layoutScrollContainer.removeAllViews()
+    private fun createSensorButtons(){
+        val viewContainer = this.viewContainer
+        if (viewContainer != null) {
+            if (viewContainer.childCount > 0) viewContainer.removeAllViews()
             var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -37,18 +33,15 @@ class SensorContainer {
             for (id in  sensors.keys) {
                 val sensor: Sensor? = sensors[id]
                 if (sensor != null){
-                    val newButton = SensorButton(layoutScrollContainer.context)
-                    sensor.setLinkToSensorButton(newButton)
+                    val newButton = SensorButton(viewContainer.context)
                     params.setMargins(10, 30, 10, 30)
                     newButton.layoutParams = params
-                    //Log.i("Added", sensor.sensorName)
-
-                    layoutScrollContainer.addView(newButton)
+                    viewContainer.addView(newButton)
+                    sensor.setLinkToSensorButton(newButton)
                 }
             }
-            layoutScrollContainer.invalidate()
+            viewContainer.invalidate()
         }
-
     }
 
     fun testGenerateData() {

@@ -22,10 +22,10 @@ class Sensor {
         this.sensorName = _sensorName
     }
 
-    fun setLinkToSensorButton(_sensorButton: SensorButton){
+    fun setLinkToSensorButton(sensorButton: SensorButton){
         //its call when sensorButton object create
-        this.sensorButton = _sensorButton
-        _sensorButton.setSensor(this)
+        this.sensorButton = sensorButton
+        sensorButton.setSensor(this)
     }
 
     fun setLinkToFragmentSensor(_fragmentSensor: FragmentSensor){

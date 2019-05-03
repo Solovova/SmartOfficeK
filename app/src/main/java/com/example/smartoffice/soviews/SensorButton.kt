@@ -26,13 +26,23 @@ class SensorButton: ConstraintLayout  {
         this.setOnClickListener(onclickListener)
     }
 
-    fun refreshValue() {
-
+    private fun refreshValue() {
+        val sensor = this.sensor
+        if (sensor != null) {
+            // ----
+        }
     }
 
-    fun setSensor(_sensor: Sensor) {
-        this.sensor = _sensor
-        textMain.text = _sensor.sensorName
+    private fun refreshAll() {
+        val sensor = this.sensor
+        if (sensor != null) {
+            textMain.text = sensor.sensorName
+        }
+    }
+
+    fun setSensor(sensor: Sensor) {
+        this.sensor = sensor
+        this.refreshAll()
     }
 
     fun getSensor():Sensor? {

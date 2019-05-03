@@ -30,7 +30,7 @@ class FragmentStart : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var app = activity?.application as SOApplication
-        app.sensorContainer.setLayoutScrollContainer(view.findViewById(R.id.LayoutScrollContainer))
+        app.sensorContainer.setViewContainer(view.findViewById(R.id.container))
     }
 
 
