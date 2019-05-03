@@ -5,6 +5,11 @@ import android.support.constraint.ConstraintLayout
 import android.widget.TextView
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
+import com.example.smartoffice.MainActivity
+import android.view.View
+
+
+
 
 class SensorButton: ConstraintLayout  {
     var textMain: TextView
@@ -15,24 +20,12 @@ class SensorButton: ConstraintLayout  {
         this.textMain = findViewById(R.id.textMain)
     }
 
-    fun setText(name: String){
-        textMain.text = name
-    }
-
-    private fun refreshAllDataFromSensor() {
-        val sensor = this.sensor
-        if (sensor != null) {
-            textMain.text = sensor.sensorName
-        }
-
-    }
-
-    fun refreshValueDataFromSensor() {
+    fun refreshValue() {
 
     }
 
     fun setSensor(_sensor: Sensor) {
         this.sensor = _sensor
-        this.refreshAllDataFromSensor()
+        textMain.text = _sensor.sensorName
     }
 }

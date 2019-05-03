@@ -2,8 +2,12 @@ package com.example.smartoffice.service
 
 import android.app.Application
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import com.example.smartoffice.soviews.SensorButton
+import com.example.smartoffice.MainActivity
+
+
 
 class SensorContainer {
     var sensors = mutableMapOf<String,Sensor>()
@@ -34,9 +38,10 @@ class SensorContainer {
                 if (sensor != null){
                     val newButton = SensorButton(layoutScrollContainer.context)
                     sensor.setLinkToView(newButton)
-                    params.setMargins(10, 20, 10, 20)
+                    params.setMargins(10, 30, 10, 30)
                     newButton.layoutParams = params
                     //Log.i("Added", sensor.sensorName)
+
                     layoutScrollContainer.addView(newButton)
                 }
             }

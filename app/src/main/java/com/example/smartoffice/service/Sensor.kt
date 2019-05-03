@@ -1,5 +1,8 @@
 package com.example.smartoffice.service
 
+import android.app.Application
+import android.view.View
+import com.example.smartoffice.R
 import com.example.smartoffice.soviews.SensorButton
 
 class Sensor {

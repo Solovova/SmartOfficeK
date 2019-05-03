@@ -7,6 +7,7 @@ import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
+import com.example.smartoffice.fragments.FragmentSensor
 
 class MainActivity : AppCompatActivity() {
     var fragments = mutableMapOf<String, Fragment>()
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         if (fragment == null ) {
             when (fragmentName) {
                 "FragmentStart" -> fragment = FragmentStart.newInstance()
+                "FragmentSensor" -> fragment = FragmentSensor.newInstance()
                 else -> fragment = FragmentBlank.newInstance()
 
             }
@@ -52,6 +54,17 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.executePendingTransactions()
     }
 
+    private fun getActiveFragments(): String {
+        var result = ""
+        for ((_key, _fragment) in fragments) {
+            if (_fragment != null && _fragment!!.isAdded && _fragment!!.isVisible) {
+                result = _key
+                break
+            }
+        }
+        return result
+    }
+
     private fun showStartScreen(showButtons: Boolean) {
         this.fragmentsShow("FragmentStart")
     }
@@ -65,4 +78,18 @@ class MainActivity : AppCompatActivity() {
     fun testClickChange(v: View) {
         //(application as SOApplication).sensorContainer.testAdd()
     }
+
+    override fun onBackPressed() {
+        when (this.getActiveFragments()) {
+            "FragmentStart" -> super.onBackPressed()
+            "FragmentSensor" -> this.showStartScreen(true)
+            else -> super.onBackPressed()
+        }
+    }
+
+    fun clickSensorButton(v: View) {
+        this.fragmentsShow("FragmentSensor")
+    }
+
+
 }
