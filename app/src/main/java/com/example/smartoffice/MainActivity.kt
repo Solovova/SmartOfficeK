@@ -78,11 +78,11 @@ class MainActivity : AppCompatActivity() {
         this.fragmentsShow("FragmentStart")
     }
 
-    fun testClickAdd() {
+    fun testClickAdd(v: View) {
         //(application as SOApplication).sensorContainer.testAdd()
     }
 
-    fun testClickChange() {
+    fun testClickChange(v: View) {
         //(application as SOApplication).sensorContainer.testAdd()
     }
 
