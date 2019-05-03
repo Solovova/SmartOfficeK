@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             //(application as SOApplication).dataContainer!!.load()
-            this.showStartScreen(false)
+            this.showStartScreen()
         }
     }
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             Log.i("SHOW CREATE",fragmentName)
             if (fragmentName.startsWith("FragmentSensor")) {
                 fragment = FragmentSensor.newInstance()
-                if (sensor!=null)  (fragment as FragmentSensor).setSensor(sensor)
+                if (sensor!=null)  fragment.setSensor(sensor)
             }else{
                 when (fragmentName) {
                     "FragmentStart" -> fragment = FragmentStart.newInstance()
@@ -57,15 +57,16 @@ class MainActivity : AppCompatActivity() {
             ft.add(R.id.container, fragment, fragmentName)
         }
         ft.show(fragment)
+        ft.addToBackStack(null)
 
         ft.commit()
-        supportFragmentManager.executePendingTransactions()
+        //supportFragmentManager.executePendingTransactions()
     }
 
     private fun getActiveFragments(): String {
         var result = ""
         for ((_key, _fragment) in fragments) {
-            if (_fragment != null && _fragment!!.isAdded && _fragment!!.isVisible) {
+            if (_fragment.isAdded && _fragment.isVisible) {
                 result = _key
                 break
             }
@@ -73,24 +74,22 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    private fun showStartScreen(showButtons: Boolean) {
+    private fun showStartScreen() {
         this.fragmentsShow("FragmentStart")
     }
 
-    fun testClickAdd(v: View) {
+    fun testClickAdd() {
         //(application as SOApplication).sensorContainer.testAdd()
-
-
     }
 
-    fun testClickChange(v: View) {
+    fun testClickChange() {
         //(application as SOApplication).sensorContainer.testAdd()
     }
 
     override fun onBackPressed() {
         val fragmentName:String = this.getActiveFragments()
         if (fragmentName.startsWith("FragmentSensor")) {
-            this.showStartScreen(true)
+            this.showStartScreen()
         }else{
             when (this.getActiveFragments()) {
                 "FragmentStart" -> super.onBackPressed()
