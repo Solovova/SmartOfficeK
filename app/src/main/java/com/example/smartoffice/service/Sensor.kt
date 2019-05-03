@@ -32,11 +32,11 @@ class Sensor {
         // its call from onViewCreate of FragmentSensor
         if (this.fragmentSensor != _fragmentSensor) {
             this.fragmentSensor = _fragmentSensor
-            this.recreateFragmentSensorButtons()
+            this.recreateSensorIndicatorButton()
         }
     }
 
-    private fun recreateFragmentSensorButtons(){
+    private fun recreateSensorIndicatorButton(){
         //ToDo create a indicators in
 
     }
