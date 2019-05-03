@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             Log.i("SHOW CREATE",fragmentName)
             if (fragmentName.startsWith("FragmentSensor")) {
                 fragment = FragmentSensor.newInstance()
-                if (sensor!=null)  fragment.setSensor(sensor)
+                if (sensor!=null)  (fragment as FragmentSensor).setSensor(sensor)
             }else{
                 when (fragmentName) {
                     "FragmentStart" -> fragment = FragmentStart.newInstance()

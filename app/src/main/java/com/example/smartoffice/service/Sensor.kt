@@ -23,6 +23,7 @@ class Sensor {
     }
 
     fun setLinkToSensorButton(_sensorButton: SensorButton){
+        //its call when sensorButton object create
         this.sensorButton = _sensorButton
         _sensorButton.setSensor(this)
     }

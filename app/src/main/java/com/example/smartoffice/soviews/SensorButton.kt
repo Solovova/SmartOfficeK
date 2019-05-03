@@ -2,8 +2,6 @@ package com.example.smartoffice.soviews
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
-import android.util.Log
-import android.view.View
 import android.widget.TextView
 import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
