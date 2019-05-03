@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
         ft.show(fragment)
 
+
         ft.commit()
         //supportFragmentManager.executePendingTransactions()
     }
