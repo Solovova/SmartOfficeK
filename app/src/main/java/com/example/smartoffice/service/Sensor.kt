@@ -3,13 +3,16 @@ package com.example.smartoffice.service
 import android.app.Application
 import android.view.View
 import com.example.smartoffice.R
+import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.soviews.SensorButton
 
 class Sensor {
     var indicators = mutableListOf<SensorIndicator>()
     var sensorID: String = ""
     var sensorName: String = ""
-    var sensorButton: SensorButton? = null
+    private var sensorButton: SensorButton? = null
+    private var fragmentSensor: FragmentSensor? = null
+
 
     constructor(_sensorID: String) {
         this.sensorID = _sensorID
@@ -19,9 +22,22 @@ class Sensor {
         this.sensorName = _sensorName
     }
 
-    fun setLinkToView(_sensorButton: SensorButton){
+    fun setLinkToSensorButton(_sensorButton: SensorButton){
         this.sensorButton = _sensorButton
         _sensorButton.setSensor(this)
+    }
+
+    fun setLinkToFragmentSensor(_fragmentSensor: FragmentSensor){
+        // its call from onViewCreate of FragmentSensor
+        if (this.fragmentSensor != _fragmentSensor) {
+            this.fragmentSensor = _fragmentSensor
+            this.recreateFragmentSensorButtons()
+        }
+    }
+
+    private fun recreateFragmentSensorButtons(){
+        //ToDo create a indicators in
+
     }
 
     fun testGenerateData(testSensorIndicatorType : Array<enIndicatorType>?) {

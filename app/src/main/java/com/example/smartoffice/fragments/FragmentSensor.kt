@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.smartoffice.R
+import com.example.smartoffice.service.Sensor
 
 class FragmentSensor : Fragment() {
+    private var sensor:Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,5 +32,14 @@ class FragmentSensor : Fragment() {
         fun newInstance() =
             FragmentSensor().apply {
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this.sensor?.setLinkToFragmentSensor(this)
+    }
+
+    fun setSensor(_sensor:Sensor){
+        this.sensor = _sensor
     }
 }

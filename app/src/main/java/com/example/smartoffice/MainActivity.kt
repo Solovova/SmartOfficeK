@@ -2,12 +2,15 @@ package com.example.smartoffice
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
 import com.example.smartoffice.fragments.FragmentSensor
+import com.example.smartoffice.service.Sensor
+import com.example.smartoffice.soviews.SensorButton
 
 class MainActivity : AppCompatActivity() {
     var fragments = mutableMapOf<String, Fragment>()
@@ -23,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     //a?.equals(b) ?: (b === null)
-    private fun fragmentsShow(fragmentName: String) {
+    fun fragmentsShow(fragmentName: String, sensor: Sensor? = null) {
+        Log.d("SHOW",fragmentName)
         val ft = supportFragmentManager.beginTransaction()
 
         //hide all fragments
@@ -34,11 +38,15 @@ class MainActivity : AppCompatActivity() {
         var fragment:Fragment? =  fragments[fragmentName]
 
         if (fragment == null ) {
-            when (fragmentName) {
-                "FragmentStart" -> fragment = FragmentStart.newInstance()
-                "FragmentSensor" -> fragment = FragmentSensor.newInstance()
-                else -> fragment = FragmentBlank.newInstance()
-
+            Log.i("SHOW CREATE",fragmentName)
+            if (fragmentName.startsWith("FragmentSensor")) {
+                fragment = FragmentSensor.newInstance()
+                if (sensor!=null)  fragment.setSensor(sensor)
+            }else{
+                when (fragmentName) {
+                    "FragmentStart" -> fragment = FragmentStart.newInstance()
+                    else -> fragment = FragmentBlank.newInstance()
+                }
             }
         }
 
@@ -80,16 +88,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        when (this.getActiveFragments()) {
-            "FragmentStart" -> super.onBackPressed()
-            "FragmentSensor" -> this.showStartScreen(true)
-            else -> super.onBackPressed()
+        val fragmentName:String = this.getActiveFragments()
+        if (fragmentName.startsWith("FragmentSensor")) {
+            this.showStartScreen(true)
+        }else{
+            when (this.getActiveFragments()) {
+                "FragmentStart" -> super.onBackPressed()
+                else -> super.onBackPressed()
+            }
         }
     }
-
-    fun clickSensorButton(v: View) {
-        this.fragmentsShow("FragmentSensor")
-    }
-
-
 }

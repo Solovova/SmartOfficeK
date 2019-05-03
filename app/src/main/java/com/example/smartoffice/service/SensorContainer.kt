@@ -19,6 +19,7 @@ class SensorContainer {
     }
 
     fun setLayoutScrollContainer (linearLayout: LinearLayout) {
+        // its call from onViewCreate of FragmentStart
         if (this.layoutScrollContainer != linearLayout) {
             this.layoutScrollContainer = linearLayout
             this.recreateSensorButtons()
@@ -37,7 +38,7 @@ class SensorContainer {
                 val sensor: Sensor? = sensors[id]
                 if (sensor != null){
                     val newButton = SensorButton(layoutScrollContainer.context)
-                    sensor.setLinkToView(newButton)
+                    sensor.setLinkToSensorButton(newButton)
                     params.setMargins(10, 30, 10, 30)
                     newButton.layoutParams = params
                     //Log.i("Added", sensor.sensorName)

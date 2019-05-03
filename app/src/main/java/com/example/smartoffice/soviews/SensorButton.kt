@@ -2,22 +2,30 @@ package com.example.smartoffice.soviews
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.util.Log
+import android.view.View
 import android.widget.TextView
+import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
-import com.example.smartoffice.MainActivity
-import android.view.View
-
-
-
 
 class SensorButton: ConstraintLayout  {
-    var textMain: TextView
+    private var textMain: TextView
     private var sensor: Sensor? = null
 
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_button, this)
         this.textMain = findViewById(R.id.textMain)
+
+        val onclickListener = OnClickListener {
+            val sensor = this.sensor
+            if (sensor!=null) {
+                val fragmentName = "FragmentSensor_${sensor.sensorID}"
+                (context as MainActivity).fragmentsShow(fragmentName, sensor)
+            }
+        }
+
+        this.setOnClickListener(onclickListener)
     }
 
     fun refreshValue() {
@@ -27,5 +35,9 @@ class SensorButton: ConstraintLayout  {
     fun setSensor(_sensor: Sensor) {
         this.sensor = _sensor
         textMain.text = _sensor.sensorName
+    }
+
+    fun getSensor():Sensor? {
+        return this.sensor
     }
 }
