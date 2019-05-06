@@ -54,8 +54,6 @@ class SensorButton: ConstraintLayout  {
         this.setOnClickListener(onclickListener)
     }
 
-
-
     private fun refreshValue() {
         val sensor = this.sensor
         if (sensor != null) {
@@ -63,25 +61,23 @@ class SensorButton: ConstraintLayout  {
             var tImgSmall: ImageView
             var tAlarm: Int
             for (t_type in EnumIndicatorsType.values()) {
+                val dataIndicatorTypeDef =  sensor.sensorContainer.getDataIndicatorTypeDef(t_type)
                 tImgBig = imgBig[t_type.ordinal]
                 tImgSmall = imgSmall[t_type.ordinal]
-                tAlarm = sensor.getArarmState(t_type)
+                tAlarm = sensor.getAlarmState(t_type)
+
                 when (tAlarm) {
                     0 -> {
                         tImgBig.visibility = View.GONE
                         tImgSmall.visibility = View.GONE
                     }
-                    1 -> {
+                    1,2 -> {
                         tImgBig.visibility = View.VISIBLE
                         tImgSmall.visibility = View.VISIBLE
-                        tImgSmall.background = ContextCompat.getDrawable(context, R.drawable.ic_sensor_pic_yellow)
-                    }
-                    2 -> {
-                        tImgBig.visibility = View.VISIBLE
-                        tImgSmall.visibility = View.VISIBLE
-                        tImgSmall.background = ContextCompat.getDrawable(context, R.drawable.ic_sensor_pic_red)
+                        tImgSmall.background = ContextCompat.getDrawable(context, dataIndicatorTypeDef.defOnButtonAlarmIdImage[tAlarm])
                     }
                 }
+
             }
         }
     }

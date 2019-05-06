@@ -66,11 +66,11 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/textView_Up"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sensor_up" />
+            android:background="@drawable/ic_sensor_up" />
 
     <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="50dp"
@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView_0"
             app:layout_constraintBottom_toBottomOf="@+id/textView_0"
-            android:background="@drawable/ic_sensor_temperature"/>
+            android:src="@drawable/ic_sensor_temperature"/>
 
     <ImageView
             android:id="@+id/imageView3"

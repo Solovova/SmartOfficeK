@@ -10,12 +10,14 @@ class Sensor {
     var indicators = mutableListOf<SensorIndicator>()
     var sensorID: String = ""
     var sensorName: String = ""
+    val sensorContainer: SensorContainer
     private var sensorButton: SensorButton? = null
     private var fragmentSensor: FragmentSensor? = null
     private var sensorIndicatorContainer: LinearLayout? = null
 
 
-    constructor(_sensorID: String) {
+    constructor(_sensorID: String, _sensorContainer: SensorContainer) {
+        this.sensorContainer = _sensorContainer
         this.sensorID = _sensorID
     }
 
@@ -62,13 +64,13 @@ class Sensor {
         if (testSensorIndicatorType == null) return
         var sensorIndicator: SensorIndicator
         for (ind in 0 until testSensorIndicatorType.size) {
-            sensorIndicator = SensorIndicator(testSensorIndicatorType[ind])
+            sensorIndicator = SensorIndicator(testSensorIndicatorType[ind],this)
             sensorIndicator.testGenerateData()
             indicators.add(sensorIndicator)
         }
     }
 
-    fun getArarmState(type: EnumIndicatorsType): Int {
+    fun getAlarmState(type: EnumIndicatorsType): Int {
         var maxAlarm  = 0
         for (indicator in indicators){
             if (indicator.type == type) {
