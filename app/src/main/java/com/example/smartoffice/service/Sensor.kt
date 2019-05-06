@@ -69,4 +69,15 @@ class Sensor {
             indicators.add(sensorIndicator)
         }
     }
+
+    fun getArarmState(type: enIndicatorType): Int {
+        var maxAlarm  = 0
+        for (indicator in indicators){
+            if (indicator.type == type) {
+                val tmpAlarm = indicator.getAlarmCode()
+                if (tmpAlarm > maxAlarm) maxAlarm = tmpAlarm
+            }
+        }
+        return maxAlarm
+    }
 }
