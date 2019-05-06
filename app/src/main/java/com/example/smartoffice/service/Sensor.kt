@@ -51,7 +51,7 @@ class Sensor {
             )
             for (indicator in indicators) {
                 val newButtonIndicator = SensorIndicatorButton(sensorIndicatorContainer.context)
-                params.setMargins(10, 30, 10, 30)
+                params.setMargins(5, 5, 5, 5)
                 newButtonIndicator.layoutParams = params
                 sensorIndicatorContainer.addView(newButtonIndicator)
                 indicator.setLinkToSensorIndicatorButton(newButtonIndicator)

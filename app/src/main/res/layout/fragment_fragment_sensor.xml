@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
+        android:background="@color/colorSOBackGround"
 
 >
     <LinearLayout
@@ -22,6 +23,8 @@
                     android:id="@+id/textHead0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorSOBlack"
+                    android:fontFamily="@font/proximanova"
                     android:text="SMART OFFICE"
                     android:textSize="25dp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +50,8 @@
                     android:layout_height="wrap_content"
                     android:text="HEALTHY"
                     android:textSize="25sp"
+                    android:textColor="@color/colorSOBlack"
+                    android:fontFamily="@font/proximanova"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +63,8 @@
                     android:layout_height="wrap_content"
                     android:text="Everything looks good"
                     android:textSize="16sp"
+                    android:textColor="@color/colorSOBlack"
+                    android:fontFamily="@font/proximanova"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Room 1"
+                    android:textColor="@color/colorSOBlack"
+                    android:fontFamily="@font/proximanova"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +88,7 @@
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@+id/button0"
+                app:layout_constraintBottom_toTopOf="@+id/textHead1"
                 tools:layout_editor_absoluteX="20dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent">

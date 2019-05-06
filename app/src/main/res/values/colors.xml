@@ -11,4 +11,7 @@
     <color name="colorSOYellow">#f7b200</color>
     <color name="colorSORed">#f46161</color>
     <color name="colorSOGreen">#0ca187</color>
+
+    <color name="colorSOBackGround">#FFFFFF</color>
+
 </resources>

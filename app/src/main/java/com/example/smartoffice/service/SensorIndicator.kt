@@ -1,7 +1,7 @@
 package com.example.smartoffice.service
 
 import com.example.smartoffice.soviews.SensorIndicatorButton
-import java.util.*
+import com.example.smartoffice.R
 
 
 class SensorIndicator  {
@@ -38,6 +38,16 @@ class SensorIndicator  {
         if (this.sensorIndicatorButton !=_sensorIndicatorButton) {
             this.sensorIndicatorButton = _sensorIndicatorButton
             _sensorIndicatorButton.setSensorIndicator(this)
+        }
+    }
+
+    fun visualGetMainImage():Int {
+        when (this.type) {
+            enIndicatorType.Humidity -> return R.drawable.ic_sensor_humidity
+            enIndicatorType.Co2 -> return R.drawable.ic_sensor_co2
+            enIndicatorType.Brightness -> return R.drawable.ic_sensor_sun
+            enIndicatorType.Temperature -> return R.drawable.ic_sensor_temperature
+            else -> return return R.drawable.ic_sensor_temperature
         }
     }
 }

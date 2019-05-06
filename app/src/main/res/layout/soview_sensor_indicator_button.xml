@@ -5,15 +5,102 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    <!--font 16-->
     <TextView
-            android:id="@+id/textMain"
-            android:layout_height="wrap_content"
+            android:id="@+id/textView_Up"
             android:layout_width="wrap_content"
-            android:text="TextViddddddddew"
-            android:elevation="100dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+
+            android:text="Temperature"
+            android:textColor="@color/colorSOGrey"
+            android:fontFamily="@font/proximanova"
+
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    <!--font 40-->
+    <TextView
+            android:id="@+id/textView_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+
+            android:text="30.16"
+            android:textColor="@color/colorSOBlack"
+
+            android:textSize="40dp"
+            android:typeface="normal"
+            android:fontFamily="@font/proximanova"
+            app:layout_constraintStart_toStartOf="@+id/textView_Up"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Up"
+            />
+
+    <!--font 20-->
+    <TextView
+            android:id="@+id/textView_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/textView_0"
+            android:text="℃"
+            android:textColor="@color/colorSOGrey"
+            android:textSize="20dp"
+            android:fontFamily="@font/proximanova"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_0"
+            app:layout_constraintStart_toEndOf="@+id/textView_0" />
+
+    <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_Up"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="50dp"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:srcCompat="@drawable/ic_sensor_up" />
+
+    <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_0"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_0"
+
+            android:background="@drawable/ic_sensor_temperature"/>
+
+    <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_0"
+            app:layout_constraintTop_toBottomOf="@+id/textView_0"
+            app:srcCompat="@drawable/ic_sensor_pic_yellow" />
+
+    <!--font 12-->
+    <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A bit dirty"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/colorSOYellow"
+            android:fontFamily="@font/proximanova"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
 </android.support.constraint.ConstraintLayout>

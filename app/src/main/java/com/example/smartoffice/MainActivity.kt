@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
-import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.service.Sensor
 
 class MainActivity : AppCompatActivity() {
-    var fragments = mutableMapOf<String, Fragment>()
+    var fragments = mutableMapOf<String, Fragment?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         //hide all fragments
         for ((key, value)  in fragments) {
-            if (key.compareTo(fragmentName)  != 0) ft.hide(value)
+            if (value != null)
+                if (key.compareTo(fragmentName)  != 0) ft.hide(value)
         }
 
         var fragment:Fragment? =  fragments[fragmentName]
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun getActiveFragments(): String {
         var result = ""
         for ((_key, _fragment) in fragments) {
-            if (_fragment.isAdded && _fragment.isVisible) {
+            if (_fragment != null && _fragment.isAdded && _fragment.isVisible) {
                 result = _key
                 break
             }

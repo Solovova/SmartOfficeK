@@ -3,17 +3,21 @@ package com.example.smartoffice.soviews
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.smartoffice.R
 import com.example.smartoffice.service.SensorIndicator
 
 class SensorIndicatorButton: ConstraintLayout  {
-    var textMain: TextView
+    private var visualTextViewUp: TextView
+    private var visualImageBig: ImageView
+
     private var sensorIndicator: SensorIndicator? = null
 
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_indicator_button, this)
-        this.textMain = findViewById(R.id.textMain)
+        this.visualTextViewUp = findViewById(R.id.textView_Up)
+        this.visualImageBig = findViewById(R.id.imageView)
     }
 
     fun refreshValue() {
@@ -23,7 +27,9 @@ class SensorIndicatorButton: ConstraintLayout  {
     private fun refreshAll() {
         val sensorIndicator = this.sensorIndicator
         if (sensorIndicator != null) {
-            this.textMain.text = sensorIndicator.type.toString()
+            this.visualTextViewUp.text = sensorIndicator.type.toString()
+            this.visualImageBig.setBackgroundResource(sensorIndicator.visualGetMainImage())
+
         }
     }
 
@@ -33,4 +39,6 @@ class SensorIndicatorButton: ConstraintLayout  {
             this.refreshAll()
         }
     }
+
+
 }
