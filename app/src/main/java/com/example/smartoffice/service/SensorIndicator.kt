@@ -28,6 +28,16 @@ class SensorIndicator  {
                 alarmRange[0] = 18.0
                 alarmRange[1] = 28.0
             }
+            enIndicatorType.Co2 -> {
+                indicatorValue = 19.0
+                alarmRange[0] = 18.0
+                alarmRange[1] = 28.0
+            }
+            enIndicatorType.Humidity -> {
+                indicatorValue = 19.0
+                alarmRange[0] = 18.0
+                alarmRange[1] = 28.0
+            }
         }
     }
 
@@ -92,12 +102,14 @@ class SensorIndicator  {
     }
 
     fun getValueSign(): String {
-        when (this.type) {
-            enIndicatorType.Temperature -> return "℃"
-            enIndicatorType.Co2 -> return "ppm"
-            enIndicatorType.Brightness -> return "lx"
-            enIndicatorType.Humidity -> return "%"
+        var result = ""
+        when {
+            this.type == enIndicatorType.Temperature -> result = "℃"
+            this.type == enIndicatorType.Co2 -> result = "ppm"
+            this.type == enIndicatorType.Brightness -> result = "lx"
+            this.type == enIndicatorType.Humidity -> result = "%"
         }
+        return result
     }
 
     fun getAlarmStay(alarmCode: Int = getAlarmCode() ):AlarmSensorIndicator  {
