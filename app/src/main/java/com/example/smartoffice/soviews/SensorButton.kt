@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
-import com.example.smartoffice.service.enIndicatorType
+import com.example.smartoffice.dataclass.EnumIndicatorsType
 
 class SensorButton: ConstraintLayout  {
     private var textMain: TextView
@@ -62,7 +62,7 @@ class SensorButton: ConstraintLayout  {
             var tImgBig: ImageView
             var tImgSmall: ImageView
             var tAlarm: Int
-            for (t_type in enIndicatorType.values()) {
+            for (t_type in EnumIndicatorsType.values()) {
                 tImgBig = imgBig[t_type.ordinal]
                 tImgSmall = imgSmall[t_type.ordinal]
                 tAlarm = sensor.getArarmState(t_type)

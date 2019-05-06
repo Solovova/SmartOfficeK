@@ -1,9 +1,7 @@
 package com.example.smartoffice.service
 
-import android.app.Application
-import android.view.View
 import android.widget.LinearLayout
-import com.example.smartoffice.R
+import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.soviews.SensorIndicatorButton
@@ -60,7 +58,7 @@ class Sensor {
         }
     }
 
-    fun testGenerateData(testSensorIndicatorType : Array<enIndicatorType>?) {
+    fun testGenerateData(testSensorIndicatorType : Array<EnumIndicatorsType>?) {
         if (testSensorIndicatorType == null) return
         var sensorIndicator: SensorIndicator
         for (ind in 0 until testSensorIndicatorType.size) {
@@ -70,7 +68,7 @@ class Sensor {
         }
     }
 
-    fun getArarmState(type: enIndicatorType): Int {
+    fun getArarmState(type: EnumIndicatorsType): Int {
         var maxAlarm  = 0
         for (indicator in indicators){
             if (indicator.type == type) {

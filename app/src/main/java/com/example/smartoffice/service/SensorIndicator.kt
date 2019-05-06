@@ -3,37 +3,36 @@ package com.example.smartoffice.service
 import android.util.Log
 import com.example.smartoffice.soviews.SensorIndicatorButton
 import com.example.smartoffice.R
+import com.example.smartoffice.dataclass.DataAlarmSensorIndicator
+import com.example.smartoffice.dataclass.EnumIndicatorsType
 
-data class AlarmSensorIndicator(val icon_visible: Boolean,
-                                val icon_id_pic: Int,
-                                val text: String,
-                                val text_color_id: Int)
+
 
 class SensorIndicator  {
     private var indicatorValue: Double = 0.0
     private var alarmRange: DoubleArray = doubleArrayOf(0.0, 0.0)
-    var type: enIndicatorType
+    var type: EnumIndicatorsType
 
     private var sensorIndicatorButton: SensorIndicatorButton? = null
 
-    constructor(_type: enIndicatorType) {
+    constructor(_type: EnumIndicatorsType) {
         type = _type
         when (type) {
-            enIndicatorType.Brightness -> {
+            EnumIndicatorsType.Brightness -> {
                 alarmRange[0] = 1.0
                 alarmRange[1] = 1.0
             }
-            enIndicatorType.Temperature -> {
+            EnumIndicatorsType.Temperature -> {
                 indicatorValue = 19.0
                 alarmRange[0] = 18.0
                 alarmRange[1] = 28.0
             }
-            enIndicatorType.Co2 -> {
+            EnumIndicatorsType.Co2 -> {
                 indicatorValue = 19.0
                 alarmRange[0] = 18.0
                 alarmRange[1] = 28.0
             }
-            enIndicatorType.Humidity -> {
+            EnumIndicatorsType.Humidity -> {
                 indicatorValue = 19.0
                 alarmRange[0] = 18.0
                 alarmRange[1] = 28.0
@@ -63,10 +62,10 @@ class SensorIndicator  {
 
     fun visualGetMainImage():Int {
         when (this.type) {
-            enIndicatorType.Humidity -> return R.drawable.ic_sensor_humidity
-            enIndicatorType.Co2 -> return R.drawable.ic_sensor_co2
-            enIndicatorType.Brightness -> return R.drawable.ic_sensor_sun
-            enIndicatorType.Temperature -> return R.drawable.ic_sensor_temperature
+            EnumIndicatorsType.Humidity -> return R.drawable.ic_sensor_humidity
+            EnumIndicatorsType.Co2 -> return R.drawable.ic_sensor_co2
+            EnumIndicatorsType.Brightness -> return R.drawable.ic_sensor_brightness
+            EnumIndicatorsType.Temperature -> return R.drawable.ic_sensor_temperature
             else -> return return R.drawable.ic_sensor_temperature
         }
     }
@@ -75,7 +74,7 @@ class SensorIndicator  {
         //0 - all is ok, 1 - upper when 1st border, 2 - upper when 2nd border ()
         //0 - all is ok, 1 - below when 1st border, 2 - upper when 2nd border (Temperature,Brightness indicator)
         when(this.type) {
-            enIndicatorType.Temperature, enIndicatorType.Brightness -> {
+            EnumIndicatorsType.Temperature, EnumIndicatorsType.Brightness -> {
                 if (this.indicatorValue <= this.alarmRange[0]) {
                     return 1
                 }else if (this.indicatorValue >= this.alarmRange[1]) {
@@ -94,25 +93,25 @@ class SensorIndicator  {
 
     fun getValueText(): String {
         when (this.type) {
-            enIndicatorType.Temperature -> return String.format("%.2f", this.indicatorValue)
-            enIndicatorType.Co2 -> return String.format("%.2f", this.indicatorValue)
-            enIndicatorType.Brightness -> return String.format("%.0f", this.indicatorValue)
-            enIndicatorType.Humidity -> return String.format("%.2f", this.indicatorValue)
+            EnumIndicatorsType.Temperature -> return String.format("%.2f", this.indicatorValue)
+            EnumIndicatorsType.Co2 -> return String.format("%.2f", this.indicatorValue)
+            EnumIndicatorsType.Brightness -> return String.format("%.0f", this.indicatorValue)
+            EnumIndicatorsType.Humidity -> return String.format("%.2f", this.indicatorValue)
         }
     }
 
     fun getValueSign(): String {
         var result = ""
         when {
-            this.type == enIndicatorType.Temperature -> result = "℃"
-            this.type == enIndicatorType.Co2 -> result = "ppm"
-            this.type == enIndicatorType.Brightness -> result = "lx"
-            this.type == enIndicatorType.Humidity -> result = "%"
+            this.type == EnumIndicatorsType.Temperature -> result = "℃"
+            this.type == EnumIndicatorsType.Co2 -> result = "ppm"
+            this.type == EnumIndicatorsType.Brightness -> result = "lx"
+            this.type == EnumIndicatorsType.Humidity -> result = "%"
         }
         return result
     }
 
-    fun getAlarmStay(alarmCode: Int = getAlarmCode() ):AlarmSensorIndicator  {
+    fun getAlarmStay(alarmCode: Int = getAlarmCode() ):DataAlarmSensorIndicator  {
         var resultIconVisible:Boolean = (alarmCode != 0)
         var resultIconIdPic:Int = R.drawable.ic_sensor_pic_yellow
         var resultText:String = "Excellent"
@@ -121,7 +120,7 @@ class SensorIndicator  {
 
 
         when(this.type) {
-            enIndicatorType.Temperature -> {
+            EnumIndicatorsType.Temperature -> {
                 when(alarmCode){
                     0 -> {
                         resultText = "Excellent"
@@ -139,7 +138,7 @@ class SensorIndicator  {
                     }
                 }
             }
-            enIndicatorType.Co2 -> {
+            EnumIndicatorsType.Co2 -> {
                 when(alarmCode){
                     0 -> {
                         resultText = "Excellent"
@@ -157,7 +156,7 @@ class SensorIndicator  {
                     }
                 }
             }
-            enIndicatorType.Humidity -> {
+            EnumIndicatorsType.Humidity -> {
                 when(alarmCode){
                     0 -> {
                         resultText = "Excellent"
@@ -175,7 +174,7 @@ class SensorIndicator  {
                     }
                 }
             }
-            enIndicatorType.Brightness -> {
+            EnumIndicatorsType.Brightness -> {
                 when(alarmCode){
                     0 -> {
                         resultText = "Excellent"
@@ -194,8 +193,8 @@ class SensorIndicator  {
                 }
             }
         }
-        Log.i("SHOW",AlarmSensorIndicator(resultIconVisible, resultIconIdPic, resultText , resultTextColorId).toString())
-        return AlarmSensorIndicator(resultIconVisible, resultIconIdPic, resultText , resultTextColorId)
+        Log.i("SHOW",DataAlarmSensorIndicator(resultIconVisible, resultIconIdPic, resultText , resultTextColorId).toString())
+        return DataAlarmSensorIndicator(resultIconVisible, resultIconIdPic, resultText , resultTextColorId)
     }
 
 

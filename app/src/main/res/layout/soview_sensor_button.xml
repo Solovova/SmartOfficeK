@@ -71,7 +71,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/ic_sensor_sun"/>
+            android:background="@drawable/ic_sensor_brightness"/>
 
     <ImageView
         android:id="@+id/imageView01"
