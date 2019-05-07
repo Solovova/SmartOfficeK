@@ -28,11 +28,7 @@ class SensorIndicator  {
         this.indicatorValue = dataIndicatorTypeDef.defValue
         this.indicatorOldValue = 0.0
         this.indicatorValueTime = 0
-
     }
-
-
-
 
     fun testGenerateData() {
 

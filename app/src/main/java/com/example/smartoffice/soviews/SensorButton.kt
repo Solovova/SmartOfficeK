@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.smartoffice.MainActivity
@@ -13,6 +14,8 @@ import com.example.smartoffice.dataclass.EnumIndicatorsType
 
 class SensorButton: ConstraintLayout  {
     private var textMain: TextView
+    private var mainButton: Button
+
     private var sensor: Sensor? = null
     private var imgBig: MutableList<ImageView>
     private var imgSmall: MutableList<ImageView>
@@ -20,6 +23,7 @@ class SensorButton: ConstraintLayout  {
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_button, this)
         this.textMain = findViewById(R.id.textMain)
+        this.mainButton = findViewById(R.id.button)
 
         var tmpImage:ImageView
 
@@ -51,7 +55,9 @@ class SensorButton: ConstraintLayout  {
             }
         }
 
-        this.setOnClickListener(onclickListener)
+        //this.setOnClickListener(onclickListener)
+
+        this.mainButton.setOnClickListener(onclickListener)
     }
 
     fun refreshValue() {

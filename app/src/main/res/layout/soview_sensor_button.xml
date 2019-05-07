@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="90dp">
     <TextView
             android:id="@+id/textMain"
             android:layout_width="wrap_content"
@@ -13,65 +13,74 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="0dp"
 
-            android:text="30.16"
+            android:text="Test room"
             android:textColor="@color/colorSOBlack"
 
-            android:textSize="30dp"
+            android:textSize="22dp"
             android:typeface="normal"
+            android:textStyle="normal"
             android:fontFamily="@font/proximanova"
             android:layout_marginLeft="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:elevation="10dp"
     />
 
     <ImageView
             android:id="@+id/imageView0"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            android:scaleType="center"
+            android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_temperature"/>
+            android:src="@drawable/ic_sensor_temperature"
+            android:elevation="10dp"/>
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:scaleType="fitCenter"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
-        android:scaleType="center"
+        app:layout_goneMarginEnd="30dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_sensor_humidity"/>
+        android:src="@drawable/ic_sensor_humidity"
+        android:elevation="10dp"/>
 
     <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
-            android:scaleType="center"
+            app:layout_goneMarginEnd="30dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_co2"/>
+            android:src="@drawable/ic_sensor_co2"
+            android:elevation="10dp"/>
 
     <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
-            android:scaleType="center"
+            app:layout_goneMarginEnd="30dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_brightness"/>
+            android:src="@drawable/ic_sensor_brightness"
+            android:elevation="10dp"/>
 
     <ImageView
         android:id="@+id/imageView01"
@@ -81,6 +90,7 @@
         android:background="@drawable/ic_sensor_pic_yellow"
         app:layout_constraintEnd_toEndOf="@+id/imageView0"
         app:layout_constraintBottom_toBottomOf="@+id/imageView0"
+        android:elevation="10dp"
 />
 
     <ImageView
@@ -91,6 +101,7 @@
             android:background="@drawable/ic_sensor_pic_yellow"
             app:layout_constraintEnd_toEndOf="@+id/imageView1"
             app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+            android:elevation="10dp"
     />
 
     <ImageView
@@ -101,6 +112,7 @@
             android:background="@drawable/ic_sensor_pic_yellow"
             app:layout_constraintEnd_toEndOf="@+id/imageView2"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            android:elevation="10dp"
     />
 
     <ImageView
@@ -111,6 +123,14 @@
             android:background="@drawable/ic_sensor_pic_yellow"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            android:elevation="10dp"
+    />
+    <Button
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/button"
+            android:elevation="0dp"
     />
 
 </android.support.constraint.ConstraintLayout>
