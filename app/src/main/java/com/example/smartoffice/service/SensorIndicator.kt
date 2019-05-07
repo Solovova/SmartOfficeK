@@ -2,11 +2,15 @@ package com.example.smartoffice.service
 
 import com.example.smartoffice.soviews.SensorIndicatorButton
 import com.example.smartoffice.dataclass.EnumIndicatorsType
-
+import com.example.smartoffice.test.TestDataRecordIndicator
+import android.os.SystemClock
 
 
 class SensorIndicator  {
     private var indicatorValue: Double
+    private var indicatorOldValue: Double
+    private var indicatorValueTime: Long
+
     var type: EnumIndicatorsType
     val sensor: Sensor
 
@@ -22,12 +26,13 @@ class SensorIndicator  {
         val dataIndicatorTypeDef =  _sensor.sensorContainer.getDataIndicatorTypeDef(this.type)
         this.alarmBorder = dataIndicatorTypeDef.defAlarmBorder.clone()
         this.indicatorValue = dataIndicatorTypeDef.defValue
+        this.indicatorOldValue = 0.0
+        this.indicatorValueTime = 0
+
     }
 
 
-    fun setIndicatorVal(_value: Double){
-        this.indicatorValue = _value
-    }
+
 
     fun testGenerateData() {
 
@@ -61,9 +66,15 @@ class SensorIndicator  {
         return this.indicatorValue
     }
 
+    private fun setIndicatorValue(_value: Double){
+        this.indicatorOldValue = this.indicatorValue
+        this.indicatorValueTime = SystemClock.currentThreadTimeMillis()
+        this.indicatorValue = _value
+        sensorIndicatorButton?.refreshValue()
+        sensor.onChangeSensorIndicator()
+    }
 
-
-
-
-
+    fun eventDataIn(testDataRecordIndicator: TestDataRecordIndicator) {
+        this.setIndicatorValue(testDataRecordIndicator.indicatorValue)
+    }
 }

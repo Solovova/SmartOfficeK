@@ -54,7 +54,7 @@ class SensorButton: ConstraintLayout  {
         this.setOnClickListener(onclickListener)
     }
 
-    private fun refreshValue() {
+    fun refreshValue() {
         val sensor = this.sensor
         if (sensor != null) {
             var tImgBig: ImageView

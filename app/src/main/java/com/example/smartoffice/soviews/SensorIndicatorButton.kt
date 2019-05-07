@@ -33,7 +33,7 @@ class SensorIndicatorButton: ConstraintLayout  {
         this.visualTextValueSign = findViewById(R.id.textView_1)
     }
 
-    private fun refreshValue() {
+    fun refreshValue() {
         val sensorIndicator = this.sensorIndicator
         if (sensorIndicator != null) {
             val dataIndicatorTypeDef =  sensorIndicator.sensor.sensorContainer.getDataIndicatorTypeDef(sensorIndicator.type)

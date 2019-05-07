@@ -5,6 +5,7 @@ import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.soviews.SensorIndicatorButton
+import com.example.smartoffice.test.TestDataRecordIndicator
 
 class Sensor {
     var indicators = mutableListOf<SensorIndicator>()
@@ -79,5 +80,19 @@ class Sensor {
             }
         }
         return maxAlarm
+    }
+
+    fun eventDataIn(testDataRecordIndicator: TestDataRecordIndicator) {
+        for (indicator in indicators) {
+            if (indicator.type == testDataRecordIndicator.indicatorType) {
+                indicator.eventDataIn(testDataRecordIndicator)
+                break
+            }
+        }
+    }
+
+    fun onChangeSensorIndicator(){
+        sensorButton?.refreshValue()
+        sensorContainer.onChangeSensor()
     }
 }

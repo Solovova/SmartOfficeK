@@ -6,23 +6,30 @@ import com.example.smartoffice.dataclass.DataIndicatorTypeDef
 import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.R
-
+import android.os.SystemClock
+import android.view.View
+import com.example.smartoffice.SOApplication
+import com.example.smartoffice.test.TestDataFlow
+import com.example.smartoffice.test.TestDataRecordIndicator
 
 class SensorContainer {
+    var myThread: Thread? = null
     var sensors = mutableMapOf<String,Sensor>()
     var sensorIndicatorDef = mutableMapOf<EnumIndicatorsType,DataIndicatorTypeDef>()
     private var viewContainer : LinearLayout? = null
+    private var testDataFlow: TestDataFlow
 
-    var app: Application? = null
-    constructor(_app: Application){
+    var app: SOApplication? = null
+    constructor(_app: SOApplication){
         this.app = _app
+        this.testDataFlow = TestDataFlow()
 
         var tmpDataIndicatorTypeDef: DataIndicatorTypeDef
 
         //Temperature
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
-            defValue = 18.0
+            defValue = 20.0
             defAlarmBorder          = arrayOf(19.0, 26.0)
             defTypeOfAlarm          = 0
             defTextAlarm            = arrayOf("Excellent", "Too cold", "Too hot")
@@ -39,7 +46,7 @@ class SensorContainer {
         //Brightness
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
-            defValue = 800.0
+            defValue = 400.0
             defAlarmBorder          = arrayOf(200.0, 600.0)
             defTypeOfAlarm          = 0
             defTextAlarm            = arrayOf("Excellent", "Too dark", "Too shine")
@@ -56,7 +63,7 @@ class SensorContainer {
         //Co2
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
-            defValue = 1800.0
+            defValue = 800.0
             defAlarmBorder          = arrayOf(1000.0, 1400.0)
             defTypeOfAlarm          = 1
             defTextAlarm            = arrayOf("Excellent", "A bit dirty", "Very dirty")
@@ -73,7 +80,7 @@ class SensorContainer {
         //Humidity
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
-            defValue = 80.0
+            defValue = 50.0
             defAlarmBorder          = arrayOf(70.0, 90.0)
             defTypeOfAlarm          = 1
             defTextAlarm            = arrayOf("Excellent", "Too wet", "Very wet")
@@ -86,6 +93,18 @@ class SensorContainer {
             defDescribe             = "Humidity"
         }
         sensorIndicatorDef[EnumIndicatorsType.Humidity] = tmpDataIndicatorTypeDef
+
+        this.myThread = Thread(
+            Runnable {
+                while (true) {
+                    app?.mainActivity?.runOnUiThread( Runnable {
+                                                 this.eventDataIn(this.testDataFlow.getNextTestRecord())
+                    })
+                    SystemClock.sleep(1000)
+                }
+            }
+        )
+        this.myThread?.start()
     }
 
     fun setViewContainer (_viewContainer: LinearLayout) {
@@ -155,5 +174,14 @@ class SensorContainer {
             sensor.testGenerateData(testSensorIndicator[testSensorID[ind]])
             sensors[testSensorID[ind]] = sensor
         }
+    }
+
+    fun eventDataIn(testDataRecordIndicator: TestDataRecordIndicator) {
+        val sensor = this.sensors[testDataRecordIndicator.sensorId]
+        sensor?.eventDataIn(testDataRecordIndicator)
+    }
+
+    fun onChangeSensor(){
+
     }
 }
