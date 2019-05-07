@@ -116,6 +116,7 @@ class SensorContainer {
     }
 
     private fun createSensorButtons(){
+        //ToDo Add sort by name and favorites
         val viewContainer = this.viewContainer
         if (viewContainer != null) {
             if (viewContainer.childCount > 0) viewContainer.removeAllViews()

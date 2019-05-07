@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
+import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.service.Sensor
 
 class MainActivity : AppCompatActivity() {
-    var fragments = mutableMapOf<String, Fragment?>()
+    private var fragments = mutableMapOf<String, Fragment?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,4 +90,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    //SensorFragment
+    fun sensorFragmentBack(v: View) {
+        this.onBackPressed()
+    }
+
+    fun sensorFragmentFavorite(v: View) {
+        val fragment: FragmentSensor = fragments[this.getActiveFragments()] as FragmentSensor
+        fragment.getSensor()?.reverseSensorFavorite()
+    }
+
+
 }

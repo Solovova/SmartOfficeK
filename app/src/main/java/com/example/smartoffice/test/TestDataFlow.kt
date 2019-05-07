@@ -10,6 +10,13 @@ class TestDataFlow {
         testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Temperature,18.0))
         testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Temperature,20.0))
         testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Temperature,36.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,1100.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,1500.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,800.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Temperature,20.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,1100.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,1500.0))
+        testData.add(TestDataRecordIndicator("id123432",EnumIndicatorsType.Co2,800.0))
     }
 
     fun getNextTestRecord() : TestDataRecordIndicator {

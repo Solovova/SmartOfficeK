@@ -12,9 +12,11 @@ class Sensor {
     var sensorID: String = ""
     var sensorName: String = ""
     val sensorContainer: SensorContainer
+    var sensorFavorite: Int = 0
     private var sensorButton: SensorButton? = null
     private var fragmentSensor: FragmentSensor? = null
     private var sensorIndicatorContainer: LinearLayout? = null
+
 
 
     constructor(_sensorID: String, _sensorContainer: SensorContainer) {
@@ -71,10 +73,10 @@ class Sensor {
         }
     }
 
-    fun getAlarmState(type: EnumIndicatorsType): Int {
+    fun getAlarmState(type: EnumIndicatorsType? = null): Int {
         var maxAlarm  = 0
         for (indicator in indicators){
-            if (indicator.type == type) {
+            if (indicator.type == type || type == null ) {
                 val tmpAlarm = indicator.getAlarmCode()
                 if (tmpAlarm > maxAlarm) maxAlarm = tmpAlarm
             }
@@ -93,6 +95,12 @@ class Sensor {
 
     fun onChangeSensorIndicator(){
         sensorButton?.refreshValue()
+        fragmentSensor?.refreshHead()
         sensorContainer.onChangeSensor()
+    }
+
+    fun reverseSensorFavorite(){
+        this.sensorFavorite =  if (this.sensorFavorite == 0)  1 else 0
+        fragmentSensor?.refreshHead()
     }
 }
