@@ -25,6 +25,7 @@ class SensorButton: ConstraintLayout  {
 
     private var onTouchListenerDownX:Float = 0.0f
     private var onTouchListenerDownButtonStartPos:Float = 0.0f
+    private var buttonDelShow:Boolean = false
 
 
     constructor(context: Context):super(context){
@@ -67,13 +68,26 @@ class SensorButton: ConstraintLayout  {
                     //Log.i("DRAG","ACTION_UP ${motionEvent.rawX} ${motionEvent.rawY}")
                     if ((this.onTouchListenerDownX - motionEvent.rawX) > 100) {
                         Log.i("DRAG","Slide left")
-                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos - this.buttonDel.width
+                        if (!this.buttonDelShow) {
+                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos - this.buttonDel.width
+                            this.buttonDelShow = true
+                        }else{
+                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos
+                        }
+
 
                     } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -100) {
                         Log.i("DRAG","Slide right")
-                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos + this.buttonDel.width
+                        if (this.buttonDelShow) {
+                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos + this.buttonDel.width
+                            this.buttonDelShow = false
+                            refreshValue()
+                        }else{
+                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos
+                        }
                     } else {
                         Log.i("DRAG","Click")
+                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos
                         val sensor = this.sensor
                         if (sensor!=null) {
                             val fragmentName = "FragmentSensor_${sensor.sensorID}"
@@ -83,8 +97,13 @@ class SensorButton: ConstraintLayout  {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     Log.i("DRAG","ACTION_MOVE ${motionEvent.rawX} ${motionEvent.rawY}")
-                    if ((this.onTouchListenerDownX - motionEvent.rawX) < this.buttonDel.width)
-                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos - (this.onTouchListenerDownX - motionEvent.rawX)
+                    if ((this.buttonDelShow && this.onTouchListenerDownX < motionEvent.rawX) ||
+                            (!this.buttonDelShow && this.onTouchListenerDownX > motionEvent.rawX)){
+
+                        hideAlarm()
+                        if ((this.onTouchListenerDownX - motionEvent.rawX) < this.buttonDel.width)
+                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos - (this.onTouchListenerDownX - motionEvent.rawX)
+                    }
                 }
             }
             return@OnTouchListener true
@@ -93,8 +112,25 @@ class SensorButton: ConstraintLayout  {
         this.buttonMain.setOnTouchListener(onTouchListener)
     }
 
-    fun refreshValue() {
+    fun hideAlarm() {
         val sensor = this.sensor
+
+        if (sensor != null) {
+            var tImgBig: ImageView
+            var tImgSmall: ImageView
+            for (t_type in EnumIndicatorsType.values()) {
+                tImgBig = imgBig[t_type.ordinal]
+                tImgSmall = imgSmall[t_type.ordinal]
+                tImgBig.visibility = View.GONE
+                tImgSmall.visibility = View.GONE
+            }
+        }
+    }
+
+    fun refreshValue() {
+        if (this.buttonDelShow) return
+        val sensor = this.sensor
+
         if (sensor != null) {
             var tImgBig: ImageView
             var tImgSmall: ImageView
