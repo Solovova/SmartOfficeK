@@ -4,7 +4,6 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -17,19 +16,23 @@ import com.example.smartoffice.dataclass.EnumIndicatorsType
 
 class SensorButton: ConstraintLayout  {
     private var textMain: TextView
-    private var mainButton: Button
+    private var buttonMain: Button
+    private var buttonDel: Button
 
     private var sensor: Sensor? = null
     private var imgBig: MutableList<ImageView>
     private var imgSmall: MutableList<ImageView>
 
     private var onTouchListenerDownX:Float = 0.0f
+    private var onTouchListenerDownButtonStartPos:Float = 0.0f
 
 
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_button, this)
         this.textMain = findViewById(R.id.textMain)
-        this.mainButton = findViewById(R.id.button)
+        this.buttonMain = findViewById(R.id.button)
+        this.buttonDel = findViewById(R.id.buttonDel)
+
 
         var tmpImage:ImageView
 
@@ -58,13 +61,17 @@ class SensorButton: ConstraintLayout  {
                 MotionEvent.ACTION_DOWN -> {
                     //Log.i("DRAG","ACTION_DOWN ${motionEvent.rawX} ${motionEvent.rawY}")
                     this.onTouchListenerDownX = motionEvent.rawX
+                    this.onTouchListenerDownButtonStartPos = this.buttonDel.x
                 }
                 MotionEvent.ACTION_UP -> {
                     //Log.i("DRAG","ACTION_UP ${motionEvent.rawX} ${motionEvent.rawY}")
                     if ((this.onTouchListenerDownX - motionEvent.rawX) > 100) {
                         Log.i("DRAG","Slide left")
+                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos - this.buttonDel.width
+
                     } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -100) {
                         Log.i("DRAG","Slide right")
+                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos + this.buttonDel.width
                     } else {
                         Log.i("DRAG","Click")
                         val sensor = this.sensor
@@ -74,12 +81,16 @@ class SensorButton: ConstraintLayout  {
                         }
                     }
                 }
-                MotionEvent.ACTION_MOVE -> Log.i("DRAG","ACTION_MOVE ${motionEvent.rawX} ${motionEvent.rawY}")
+                MotionEvent.ACTION_MOVE -> {
+                    Log.i("DRAG","ACTION_MOVE ${motionEvent.rawX} ${motionEvent.rawY}")
+                    if ((this.onTouchListenerDownX - motionEvent.rawX) < this.buttonDel.width)
+                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos - (this.onTouchListenerDownX - motionEvent.rawX)
+                }
             }
             return@OnTouchListener true
         }
 
-        this.mainButton.setOnTouchListener(onTouchListener)
+        this.buttonMain.setOnTouchListener(onTouchListener)
     }
 
     fun refreshValue() {

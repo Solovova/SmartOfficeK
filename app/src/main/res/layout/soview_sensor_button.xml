@@ -131,6 +131,18 @@
             android:layout_height="match_parent"
             android:id="@+id/button"
             android:elevation="0dp"
+            android:textAllCaps="false"
+    />
+
+    <Button
+            android:text="Delete"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonDel"
+            android:elevation="200dp"
+            android:fontFamily="@font/proximanova"
+            android:background="@color/colorSOGrey"
+            app:layout_constraintLeft_toRightOf="parent"
     />
 
 </android.support.constraint.ConstraintLayout>
