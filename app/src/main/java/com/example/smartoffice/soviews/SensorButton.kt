@@ -3,6 +3,9 @@ package com.example.smartoffice.soviews
 import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
+import android.util.Log
+import android.view.DragEvent
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -19,6 +22,9 @@ class SensorButton: ConstraintLayout  {
     private var sensor: Sensor? = null
     private var imgBig: MutableList<ImageView>
     private var imgSmall: MutableList<ImageView>
+
+    private var onTouchListenerDownX:Float = 0.0f
+
 
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_button, this)
@@ -47,17 +53,33 @@ class SensorButton: ConstraintLayout  {
         tmpImage = findViewById(R.id.imageView31)
         imgSmall.add(tmpImage)
 
-        val onclickListener = OnClickListener {
-            val sensor = this.sensor
-            if (sensor!=null) {
-                val fragmentName = "FragmentSensor_${sensor.sensorID}"
-                (context as MainActivity).fragmentsShow(fragmentName, sensor)
+        val onTouchListener = OnTouchListener { _, motionEvent ->
+            when(motionEvent.action){
+                MotionEvent.ACTION_DOWN -> {
+                    //Log.i("DRAG","ACTION_DOWN ${motionEvent.rawX} ${motionEvent.rawY}")
+                    this.onTouchListenerDownX = motionEvent.rawX
+                }
+                MotionEvent.ACTION_UP -> {
+                    //Log.i("DRAG","ACTION_UP ${motionEvent.rawX} ${motionEvent.rawY}")
+                    if ((this.onTouchListenerDownX - motionEvent.rawX) > 100) {
+                        Log.i("DRAG","Slide left")
+                    } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -100) {
+                        Log.i("DRAG","Slide right")
+                    } else {
+                        Log.i("DRAG","Click")
+                        val sensor = this.sensor
+                        if (sensor!=null) {
+                            val fragmentName = "FragmentSensor_${sensor.sensorID}"
+                            (context as MainActivity).fragmentsShow(fragmentName, sensor)
+                        }
+                    }
+                }
+                MotionEvent.ACTION_MOVE -> Log.i("DRAG","ACTION_MOVE ${motionEvent.rawX} ${motionEvent.rawY}")
             }
+            return@OnTouchListener true
         }
 
-        //this.setOnClickListener(onclickListener)
-
-        this.mainButton.setOnClickListener(onclickListener)
+        this.mainButton.setOnTouchListener(onTouchListener)
     }
 
     fun refreshValue() {
