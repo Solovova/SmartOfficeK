@@ -1,13 +1,16 @@
 package com.example.smartoffice.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.google.android.gms.vision.barcode.Barcode
 import com.example.smartoffice.R
 import com.notbytes.barcode_reader.BarcodeReaderFragment
@@ -16,6 +19,7 @@ import com.notbytes.barcode_reader.BarcodeReaderFragment
 class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
     private var barcodeReader: BarcodeReaderFragment? = null
     private var useFlash: Boolean = false
+    private var buttonInput: Button? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,21 @@ class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
         val view = inflater.inflate(R.layout.fragment_fragment_scan, container, false)
         barcodeReader = childFragmentManager.findFragmentById(R.id.barcode_fragment) as BarcodeReaderFragment
         barcodeReader?.setListener(this)
+
+        val onClickListenerInput = View.OnClickListener { _ ->
+            val mcontext = context
+            if (mcontext != null){
+                MaterialDialog(mcontext).show {
+                    input  ()
+                    //positiveButton("Test")
+                }
+            }
+
+
+            return@OnClickListener
+        }
+        this.buttonInput = view.findViewById(R.id.buttonInput)
+        this.buttonInput?.setOnClickListener(onClickListenerInput)
         return view
     }
 

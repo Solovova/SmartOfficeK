@@ -1,8 +1,8 @@
 package com.example.smartoffice.soviews
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -14,7 +14,7 @@ import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 import com.example.smartoffice.dataclass.EnumIndicatorsType
 
-class SensorButton: ConstraintLayout  {
+class SensorButton: ConstraintLayout {
     private var textMain: TextView
     private var buttonMain: Button
     private var buttonDel: Button
