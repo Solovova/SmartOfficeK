@@ -9,8 +9,11 @@ import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.service.Sensor
+import com.daimajia.swipe.SwipeLayout
 
 class MainActivity : AppCompatActivity() {
+
+    //SwipeLayout
     private var fragments = mutableMapOf<String, Fragment?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

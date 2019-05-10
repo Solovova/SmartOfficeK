@@ -42,6 +42,7 @@
                     android:onClick="sensorFragmentBack"
             />
 
+
             <ImageView
                     android:id="@+id/imageView_star"
                     android:layout_width="24dp"
