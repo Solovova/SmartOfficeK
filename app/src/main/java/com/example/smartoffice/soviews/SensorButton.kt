@@ -66,7 +66,7 @@ class SensorButton: ConstraintLayout  {
                 }
                 MotionEvent.ACTION_UP -> {
                     //Log.i("DRAG","ACTION_UP ${motionEvent.rawX} ${motionEvent.rawY}")
-                    if ((this.onTouchListenerDownX - motionEvent.rawX) > 100) {
+                    if ((this.onTouchListenerDownX - motionEvent.rawX) > 20) {
                         Log.i("DRAG","Slide left")
                         if (!this.buttonDelShow) {
                             this.buttonDel.x = this.onTouchListenerDownButtonStartPos - this.buttonDel.width
@@ -76,7 +76,7 @@ class SensorButton: ConstraintLayout  {
                         }
 
 
-                    } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -100) {
+                    } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -20) {
                         Log.i("DRAG","Slide right")
                         if (this.buttonDelShow) {
                             this.buttonDel.x = this.onTouchListenerDownButtonStartPos + this.buttonDel.width
@@ -148,7 +148,7 @@ class SensorButton: ConstraintLayout  {
                     }
                     1,2 -> {
                         tImgBig.visibility = View.VISIBLE
-                        tImgSmall.visibility = View.VISIBLE
+                        tImgSmall.visibility = View.GONE
                         tImgSmall.background = ContextCompat.getDrawable(context, dataIndicatorTypeDef.defOnButtonAlarmIdImage[tAlarm])
                     }
                 }

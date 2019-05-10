@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_temperature"
+            android:src="@drawable/ic_sensor_temperature_grey"
             android:elevation="10dp"/>
 
     <ImageView
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_sensor_humidity"
+        android:src="@drawable/ic_sensor_humidity_grey"
         android:elevation="10dp"/>
 
     <ImageView
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_co2"
+            android:src="@drawable/ic_sensor_co2_grey"
             android:elevation="10dp"/>
 
     <ImageView
@@ -79,7 +79,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor_brightness"
+            android:src="@drawable/ic_sensor_brightness_grey"
             android:elevation="10dp"/>
 
     <ImageView
@@ -142,8 +142,9 @@
             android:elevation="200dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:textAllCaps="false"
             android:fontFamily="@font/proximanova"
-            android:background="@color/colorSOGrey"
+            android:background="@color/colorSOGreyLight"
             app:layout_constraintLeft_toRightOf="parent"
     />
 

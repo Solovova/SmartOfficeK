@@ -37,6 +37,7 @@ class SensorContainer {
             defTextAlarmIdImage     = arrayOf(0, R.drawable.ic_sensor_pic_blue, R.drawable.ic_sensor_pic_red)
             defOnButtonAlarmIdImage = arrayOf(0, R.drawable.ic_sensor_pic_blue, R.drawable.ic_sensor_pic_red)
             idBigPicture            = R.drawable.ic_sensor_temperature
+            idBigPictureGrey        = R.drawable.ic_sensor_temperature_grey
             defFormatString         = "%.2f"
             defDescribeValue        = "℃"
             defDescribe             = "Temperature"
@@ -54,6 +55,7 @@ class SensorContainer {
             defTextAlarmIdImage     = arrayOf(0, R.drawable.ic_sensor_pic_blue, R.drawable.ic_sensor_pic_red)
             defOnButtonAlarmIdImage = arrayOf(0, R.drawable.ic_sensor_pic_blue, R.drawable.ic_sensor_pic_red)
             idBigPicture            = R.drawable.ic_sensor_brightness
+            idBigPictureGrey        = R.drawable.ic_sensor_brightness_grey
             defFormatString         = "%.0f"
             defDescribeValue        = "lx"
             defDescribe             = "Brightness"
@@ -71,6 +73,7 @@ class SensorContainer {
             defTextAlarmIdImage     = arrayOf(0, R.drawable.ic_sensor_pic_yellow, R.drawable.ic_sensor_pic_red)
             defOnButtonAlarmIdImage = arrayOf(0, R.drawable.ic_sensor_pic_yellow, R.drawable.ic_sensor_pic_red)
             idBigPicture            = R.drawable.ic_sensor_co2
+            idBigPictureGrey        = R.drawable.ic_sensor_co2_grey
             defFormatString         = "%.0f"
             defDescribeValue        = "ppm"
             defDescribe             = "Co2"
@@ -88,6 +91,7 @@ class SensorContainer {
             defTextAlarmIdImage     = arrayOf(0, R.drawable.ic_sensor_pic_yellow, R.drawable.ic_sensor_pic_red)
             defOnButtonAlarmIdImage = arrayOf(0, R.drawable.ic_sensor_pic_yellow, R.drawable.ic_sensor_pic_red)
             idBigPicture            = R.drawable.ic_sensor_humidity
+            idBigPictureGrey        = R.drawable.ic_sensor_humidity_grey
             defFormatString         = "%.0f"
             defDescribeValue        = "%"
             defDescribe             = "Humidity"
