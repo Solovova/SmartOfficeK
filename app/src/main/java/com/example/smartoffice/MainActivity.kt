@@ -7,6 +7,7 @@ import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.FragmentBlank
+import com.example.smartoffice.fragments.FragmentScan
 import com.example.smartoffice.fragments.FragmentSensor
 import com.example.smartoffice.service.Sensor
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 when (fragmentName) {
                     "FragmentStart" -> fragment = FragmentStart.newInstance()
+                    "FragmentScan" -> fragment = FragmentScan.newInstance()
                     else -> fragment = FragmentBlank.newInstance()
                 }
             }
@@ -88,9 +90,16 @@ class MainActivity : AppCompatActivity() {
         }else{
             when (this.getActiveFragments()) {
                 "FragmentStart" -> super.onBackPressed()
+                "FragmentScan" -> this.fragmentsShow("FragmentStart")
                 else -> super.onBackPressed()
             }
         }
+    }
+
+    //StartFragment
+
+    fun startFragmentScan(v: View) {
+        this.fragmentsShow("FragmentScan")
     }
 
     //SensorFragment
@@ -102,6 +111,8 @@ class MainActivity : AppCompatActivity() {
         val fragment: FragmentSensor = fragments[this.getActiveFragments()] as FragmentSensor
         fragment.getSensor()?.reverseSensorFavorite()
     }
+
+
 
 
 }

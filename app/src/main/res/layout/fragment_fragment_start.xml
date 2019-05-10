@@ -75,6 +75,7 @@
                 android:typeface="normal"
                 android:textStyle="bold"
                 android:fontFamily="@font/proximanova"
+                android:onClick="startFragmentScan"
         />
 
     </android.support.constraint.ConstraintLayout>

@@ -100,7 +100,7 @@ artifactory {
 
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 28
     buildToolsVersion '26.0.2'
 
 
@@ -137,7 +137,7 @@ dependencies {
     })
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:27.0.0'
+    implementation 'com.android.support:design:28.0.0'
     testImplementation 'junit:junit:4.12'
 
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
