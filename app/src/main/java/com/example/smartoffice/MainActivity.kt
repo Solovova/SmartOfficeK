@@ -99,15 +99,18 @@ class MainActivity : AppCompatActivity() {
     //StartFragment
 
     fun startFragmentScan(v: View) {
+        Log.i("Button click", v.id.toString())
         this.fragmentsShow("FragmentScan")
     }
 
     //SensorFragment
     fun sensorFragmentBack(v: View) {
+        Log.i("Button click", v.id.toString())
         this.onBackPressed()
     }
 
     fun sensorFragmentFavorite(v: View) {
+        Log.i("Button click", v.id.toString())
         val fragment: FragmentSensor = fragments[this.getActiveFragments()] as FragmentSensor
         fragment.getSensor()?.reverseSensorFavorite()
     }
