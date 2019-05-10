@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.input.input
 import com.google.android.gms.vision.barcode.Barcode
 import com.example.smartoffice.R
@@ -34,10 +35,13 @@ class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
         barcodeReader?.setListener(this)
 
         val onClickListenerInput = View.OnClickListener { _ ->
-            val mcontext = context
-            if (mcontext != null){
-                MaterialDialog(mcontext).show {
+            val mContext = context
+            if (mContext != null){
+                MaterialDialog(mContext).show {
                     input  ()
+
+                        .autoDismissEnabled
+                    ModalDialog
                     //positiveButton("Test")
                 }
             }
