@@ -189,4 +189,9 @@ class SensorContainer {
     fun onChangeSensor(){
 
     }
+
+    fun deleteSensor(sensor: Sensor) {
+        sensors.remove(sensor.sensorID)
+        this.createSensorButtons()
+    }
 }

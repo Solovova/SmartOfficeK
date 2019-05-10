@@ -109,7 +109,17 @@ class SensorButton: ConstraintLayout  {
             return@OnTouchListener true
         }
 
+        val onClickListenerDel = OnClickListener { _ ->
+            val sensor = this.sensor
+            if (sensor != null) {
+                val sensorContainer = sensor.sensorContainer
+                sensorContainer.deleteSensor(sensor)
+            }
+            return@OnClickListener
+        }
+
         this.buttonMain.setOnTouchListener(onTouchListener)
+        this.buttonDel.setOnClickListener(onClickListenerDel)
     }
 
     private fun hideAlarm() {
