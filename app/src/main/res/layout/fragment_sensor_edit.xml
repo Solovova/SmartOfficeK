@@ -8,7 +8,7 @@
                                                    tools:context=".MainActivity">
 
     <ImageView
-            android:id="@+id/imageView_back"
+            android:id="@+id/buttonBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="19dp"
@@ -16,8 +16,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_sensor_arrow_back"
-            android:onClick="sensorEditBack"
     />
+
+
 
     <LinearLayout
             android:id="@+id/linearLayout"
@@ -36,6 +37,7 @@
             android:layout_marginRight="10dp"
 
     >
+
 
         <EditText
                 android:id="@+id/textViewEdit"
@@ -82,5 +84,20 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
     />
+
+    <TextView
+            android:id="@+id/textID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+
+            android:fontFamily="@font/proximanova"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+    />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

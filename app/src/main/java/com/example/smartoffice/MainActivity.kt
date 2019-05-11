@@ -40,42 +40,36 @@ class MainActivity : AppCompatActivity() {
 
         var fragment: FragmentParent? =  fragments[fragmentName]
 
-        if (fragment == null ) {
-            Log.i("SHOW CREATE",fragmentName)
-            if (fragmentName.startsWith("FragmentSensor")) {
-                fragment = FragmentSensor.newInstance()
-                if (sensor != null) fragment.setSensor(sensor)
-            }else{
-                when (fragmentName) {
-                    "FragmentStart"         -> fragment = FragmentStart.newInstance()
-                    "FragmentStartBlank"    -> fragment = FragmentStartBlank.newInstance()
-                    "FragmentScan"          -> fragment = FragmentScan.newInstance()
-                    "FragmentEnterCode"     -> fragment = FragmentEnterCode.newInstance()
-                    "FragmentIDAddedFalse"  -> fragment = FragmentIDAddedFalse.newInstance()
-                    "FragmentIDAddedOk"     -> fragment = FragmentIDAddedOk.newInstance()
-                    "FragmentEditSensor"    -> fragment = FragmentEditSensor.newInstance()
-
-                    else -> fragment = FragmentBlank.newInstance()
-                }
+        if (fragment == null) {
+            Log.i("SHOW CREATE", fragmentName)
+            when (fragmentName) {
+                "FragmentSensor" -> fragment = FragmentSensor.newInstance()
+                "FragmentStart" -> fragment = FragmentStart.newInstance()
+                "FragmentStartBlank" -> fragment = FragmentStartBlank.newInstance()
+                "FragmentScan" -> fragment = FragmentScan.newInstance()
+                "FragmentEnterCode" -> fragment = FragmentEnterCode.newInstance()
+                "FragmentIDAddedFalse" -> fragment = FragmentIDAddedFalse.newInstance()
+                "FragmentIDAddedOk" -> fragment = FragmentIDAddedOk.newInstance()
+                "FragmentSensorEdit" -> fragment = FragmentSensorEdit.newInstance()
+                else -> fragment = FragmentBlank.newInstance()
             }
         }
 
-        if (fragmentName.startsWith("FragmentEditSensor")) {
-            (fragment as FragmentEditSensor).sensor = sensor
+        if (fragmentName.compareTo("FragmentSensorEdit") == 0) {
+            (fragment as FragmentSensorEdit).sensor = sensor
+        }
+
+        if (fragmentName.compareTo("FragmentSensor") == 0) {
+            (fragment as FragmentSensor).sensor = sensor
         }
 
         fragments[fragmentName]=fragment
-        Log.i("show", fragmentName)
-        if (!fragment.isAdded) {
-            Log.i("add", fragmentName)
-            ft.add(R.id.container, fragment, fragmentName)
-        }
+        if (!fragment.isAdded) ft.add(R.id.container, fragment, fragmentName)
+
         ft.show(fragment)
         fragment.onShow()
 
-
         ft.commit()
-        //supportFragmentManager.executePendingTransactions()
     }
 
     private fun getActiveFragments(): String {
@@ -97,24 +91,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val fragmentName:String = this.getActiveFragments()
-        Log.i("SHOW Back press", fragmentName)
-        if (fragmentName.startsWith("FragmentSensor")) {
-            this.showStartScreen()
-        }else{
-            when (this.getActiveFragments()) {
-                "FragmentStart"         -> super.onBackPressed()
-                "FragmentScan"          -> this.showStartScreen()
-                "FragmentEnterCode"     -> this.fragmentsShow("FragmentScan")
-                "FragmentEditSensor"     -> {
-                    val fragmentEditSensor = fragments["FragmentEditSensor"] as FragmentEditSensor
-                    if (fragmentEditSensor != null) {
-                        val fragmentName = "FragmentSensor_${fragmentEditSensor.sensor?.sensorID}"
-                        this.fragmentsShow(fragmentName, fragmentEditSensor.sensor)
-                    }
+        when (this.getActiveFragments()) {
+            "FragmentSensor" -> this.showStartScreen()
+            "FragmentStart" -> super.onBackPressed()
+            "FragmentScan" -> this.showStartScreen()
+            "FragmentEnterCode" -> this.fragmentsShow("FragmentScan")
+            "FragmentSensorEdit" -> {
+                val fragmentEditSensor = fragments["FragmentSensorEdit"] as FragmentSensorEdit
+                if (fragmentEditSensor != null) {
+                    this.fragmentsShow("FragmentSensor", fragmentEditSensor.sensor)
                 }
-                else -> super.onBackPressed()
             }
+            else -> super.onBackPressed()
         }
     }
 
@@ -131,7 +119,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     //ScanFragment
-
     fun scanFragmentEnterCode(v: View) {
         Log.i("Button click", v.id.toString())
         this.fragmentsShow("FragmentEnterCode")
@@ -157,11 +144,5 @@ class MainActivity : AppCompatActivity() {
             (application as SOApplication).sensorContainer.addSensor(strNewID)
             this.showStartScreen()
         }
-    }
-
-    //EditSensorFragment
-    fun sensorEditBack(v: View) {
-        Log.i("Button click", v.id.toString())
-        this.onBackPressed()
     }
 }

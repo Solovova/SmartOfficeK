@@ -63,18 +63,12 @@ class SensorButton: ConstraintLayout {
         this.buttonDel.setOnClickListener(onClickListenerDel)
 
         val onClickListenerMain = OnClickListener {
-            val sensor = this.sensor
-            if (sensor!=null) {
-                val fragmentName = "FragmentSensor_${sensor.sensorID}"
-                (context as MainActivity).fragmentsShow(fragmentName, sensor)
-            }
+            (context as MainActivity).fragmentsShow("FragmentSensor", sensor)
             return@OnClickListener
         }
 
         this.buttonMain.setOnClickListener(onClickListenerMain)
     }
-
-
 
     fun refreshValue() {
 
@@ -101,12 +95,11 @@ class SensorButton: ConstraintLayout {
                         tImgSmall.background = ContextCompat.getDrawable(context, dataIndicatorTypeDef.defOnButtonAlarmIdImage[tAlarm])
                     }
                 }
-
             }
         }
     }
 
-    fun refreshAll() {
+    private fun refreshAll() {
         val sensor = this.sensor
         if (sensor != null) {
             textMain.text = sensor.sensorName
@@ -117,9 +110,5 @@ class SensorButton: ConstraintLayout {
     fun setSensor(sensor: Sensor) {
         this.sensor = sensor
         this.refreshAll()
-    }
-
-    fun getSensor():Sensor? {
-        return this.sensor
     }
 }

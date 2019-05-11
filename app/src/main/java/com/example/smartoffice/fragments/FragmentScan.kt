@@ -18,30 +18,33 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
     private var useFlash: Boolean = false
     private var buttonFlash: ImageView? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_scan, container, false)
-        barcodeReader = childFragmentManager.findFragmentById(R.id.barcode_fragment) as BarcodeReaderFragment
-        barcodeReader?.setListener(this)
+        return inflater.inflate(R.layout.fragment_scan, container, false)
+    }
 
-        this.useFlash = false
+    override fun onShow() {
+        super.onShow()
+        val view = this.view
+        if (view != null) {
+            barcodeReader = childFragmentManager.findFragmentById(R.id.barcode_fragment) as BarcodeReaderFragment
+            barcodeReader?.setListener(this)
 
-        val onClickListenerFlash = View.OnClickListener {
-            this.useFlash = !this.useFlash
-            barcodeReader?.setUseFlash(this.useFlash)
-            when (this.useFlash) {
-                false -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
-                true -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_on)
+            this.useFlash = false
+
+
+            val onClickListenerFlash = View.OnClickListener {
+                this.useFlash = !this.useFlash
+                barcodeReader?.setUseFlash(this.useFlash)
+                when (this.useFlash) {
+                    false -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
+                    true -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_on)
+                }
             }
+
+            this.buttonFlash = view.findViewById(R.id.imageViewFlash)
+            this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
+            this.buttonFlash?.setOnClickListener(onClickListenerFlash)
         }
-
-        this.buttonFlash = view.findViewById(R.id.imageViewFlash)
-        this.buttonFlash?.setOnClickListener(onClickListenerFlash)
-
-        return view
     }
 
     override fun onHide() {

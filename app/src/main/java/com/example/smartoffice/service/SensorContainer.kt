@@ -109,16 +109,12 @@ class SensorContainer {
         this.myThread?.start()
     }
 
-    fun setViewContainer (_viewContainer: LinearLayout) {
-        // its call from onViewCreate of FragmentStart
-        if (this.viewContainer != _viewContainer) {
-            this.viewContainer = _viewContainer
-            this.createSensorButtons()
-        }
+    fun setViewContainer (viewContainer: LinearLayout) {
+        this.viewContainer = viewContainer
+        this.createSensorButtons()
     }
 
     private fun createSensorButtons(){
-        //ToDo Add sort by name and favorites
         val viewContainer = this.viewContainer
         if (viewContainer != null) {
             if (viewContainer.childCount > 0) viewContainer.removeAllViews()
@@ -208,5 +204,11 @@ class SensorContainer {
         sensors[_id] = sensor
         this.createSensorButtons()
         return "OK"
+    }
+
+    fun setLinkToViewNull(){
+        for (sensor in sensors.values) {
+            sensor.setLinkToViewNull()
+        }
     }
 }

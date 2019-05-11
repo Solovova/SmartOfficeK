@@ -1,9 +1,6 @@
-//ToDo Add room name editable
-
 package com.example.smartoffice.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +12,8 @@ import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 
 class FragmentSensor : FragmentParent() {
-    private var sensor:Sensor? = null
+    var sensor:Sensor? = null
+
     private var textViewSensorName: TextView? = null
     private var imageViewSensorFavorite: ImageView? = null
 
@@ -24,43 +22,36 @@ class FragmentSensor : FragmentParent() {
 
     private var buttonEdit: ImageView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup? ,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup? ,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_sensor, container, false)
     }
 
-
     companion object {
         @JvmStatic
-        fun newInstance() =
-            FragmentSensor().apply {
-            }
+        fun newInstance() = FragmentSensor()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onShow() {
+        super.onShow()
+        val view = this.view
+        if(view != null) {
+            textViewSensorName = view.findViewById(R.id.textHeadSensorName)
+            imageViewSensorFavorite = view.findViewById(R.id.imageView_star)
 
-        textViewSensorName = view.findViewById(R.id.textHeadSensorName)
-        imageViewSensorFavorite = view.findViewById(R.id.imageView_star)
+            imageViewFace = view.findViewById(R.id.imageViewFace)
+            textViewAlarm = view.findViewById(R.id.textHeadAlarm)
 
-        imageViewFace = view.findViewById(R.id.imageViewFace)
-        textViewAlarm = view.findViewById(R.id.textHeadAlarm)
+            this.sensor?.setLinkToView(this, view.findViewById(R.id.SensorIndicatorContainer))
 
+            val onClickListenerEdit = View.OnClickListener {
+                (activity as MainActivity).fragmentsShow("FragmentSensorEdit", this.sensor)
+            }
 
-        this.sensor?.setLinkToFragmentSensor(this, view.findViewById(R.id.SensorIndicatorContainer))
+            this.buttonEdit = view.findViewById(R.id.imageView_star)
+            this.buttonEdit?.setOnClickListener(onClickListenerEdit)
 
-        val onClickListenerEdit = View.OnClickListener {
-            (activity as MainActivity).fragmentsShow("FragmentEditSensor", this.sensor)
+            this.refreshHead()
         }
-
-        this.buttonEdit = view.findViewById(R.id.imageView_star)
-        this.buttonEdit?.setOnClickListener(onClickListenerEdit)
-
-        Log.i("SHOW","on onViewCreated ${this.sensor?.sensorID}")
     }
 
     fun refreshHead() {
@@ -68,7 +59,6 @@ class FragmentSensor : FragmentParent() {
         if (sensor != null) {
             val textViewSensorName = this.textViewSensorName
             if (textViewSensorName != null) textViewSensorName.text = sensor.sensorName
-
 
             val imageViewFace = this.imageViewFace
             val textViewAlarm = this.textViewAlarm
@@ -81,17 +71,5 @@ class FragmentSensor : FragmentParent() {
                 textViewAlarm.text = tHeadAlarm[tAlarm]
             }
         }
-    }
-
-    fun setSensor(_sensor:Sensor){
-        this.sensor = _sensor
-
-
-
-        this.refreshHead()
-    }
-
-    fun getSensor():Sensor? {
-        return this.sensor
     }
 }

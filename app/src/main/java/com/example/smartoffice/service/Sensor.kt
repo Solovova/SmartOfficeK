@@ -25,24 +25,27 @@ class Sensor {
 
     fun setName(_sensorName:String){
         this.sensorName = _sensorName
-        sensorButton?.refreshAll()
-        fragmentSensor?.refreshHead()
+        //sensorButton?.refreshAll()
+        //fragmentSensor?.refreshHead()
     }
 
     fun setLinkToSensorButton(sensorButton: SensorButton){
-        //its call when sensorButton object create
         this.sensorButton = sensorButton
         sensorButton.setSensor(this)
     }
 
-    fun setLinkToFragmentSensor(_fragmentSensor: FragmentSensor, _sensorIndicatorContainer: LinearLayout){
-        // its call from onViewCreate of FragmentSensor
+    fun setLinkToView(_fragmentSensor: FragmentSensor, _sensorIndicatorContainer: LinearLayout){
         if (this.fragmentSensor != _fragmentSensor || this.sensorIndicatorContainer != _sensorIndicatorContainer) {
+            this.sensorContainer.setLinkToViewNull()
             this.fragmentSensor = _fragmentSensor
             this.sensorIndicatorContainer = _sensorIndicatorContainer
-            _fragmentSensor.setSensor(this)
             this.createSensorIndicatorButton()
         }
+    }
+
+    fun setLinkToViewNull(){
+        this.fragmentSensor = null
+        this.sensorIndicatorContainer = null
     }
 
     private fun createSensorIndicatorButton(){

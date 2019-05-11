@@ -1,6 +1,5 @@
 package com.example.smartoffice.soviews
 
-
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
