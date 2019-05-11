@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 import com.example.smartoffice.dataclass.EnumIndicatorsType
@@ -61,11 +62,15 @@ class SensorButton: ConstraintLayout {
         this.buttonDel.setOnClickListener(onClickListenerDel)
 
         val onClickListenerMain = OnClickListener { _ ->
-
+            val sensor = this.sensor
+            if (sensor!=null) {
+                val fragmentName = "FragmentSensor_${sensor.sensorID}"
+                (context as MainActivity).fragmentsShow(fragmentName, sensor)
+            }
             return@OnClickListener
         }
 
-        this.buttonMain.setOnClickListener(onClickListenerDel)
+        this.buttonMain.setOnClickListener(onClickListenerMain)
     }
 
 
