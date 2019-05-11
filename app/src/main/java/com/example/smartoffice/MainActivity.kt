@@ -3,12 +3,9 @@ package com.example.smartoffice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.smartoffice.fragments.FragmentStart
 import android.util.Log
 import android.view.View
-import com.example.smartoffice.fragments.FragmentBlank
-import com.example.smartoffice.fragments.FragmentScan
-import com.example.smartoffice.fragments.FragmentSensor
+import com.example.smartoffice.fragments.*
 import com.example.smartoffice.service.Sensor
 
 class MainActivity : AppCompatActivity() {
@@ -47,8 +44,14 @@ class MainActivity : AppCompatActivity() {
                 if (sensor!=null)  fragment.setSensor(sensor)
             }else{
                 when (fragmentName) {
-                    "FragmentStart" -> fragment = FragmentStart.newInstance()
-                    "FragmentScan" -> fragment = FragmentScan.newInstance()
+                    "FragmentStart"         -> fragment = FragmentStart.newInstance()
+                    "FragmentStartBlank"    -> fragment = FragmentStartBlank.newInstance()
+                    "FragmentScan"          -> fragment = FragmentScan.newInstance()
+                    "FragmentEnterCode"     -> fragment = FragmentEnterCode.newInstance()
+                    "FragmentIDAddedFalse"  -> fragment = FragmentIDAddedFalse.newInstance()
+                    "FragmentIDAddedOk"     -> fragment = FragmentIDAddedOk.newInstance()
+                    "FragmentSensorEdit"    -> fragment = FragmentSensorEdit.newInstance()
+
                     else -> fragment = FragmentBlank.newInstance()
                 }
             }
@@ -109,11 +112,9 @@ class MainActivity : AppCompatActivity() {
         this.onBackPressed()
     }
 
-    fun sensorFragmentFavorite(v: View) {
-        Log.i("Button click", v.id.toString())
-        val fragment: FragmentSensor = fragments[this.getActiveFragments()] as FragmentSensor
-        fragment.getSensor()?.reverseSensorFavorite()
-    }
+
+
+
 
 
 

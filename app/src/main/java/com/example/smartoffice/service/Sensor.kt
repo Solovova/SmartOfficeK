@@ -8,11 +8,10 @@ import com.example.smartoffice.soviews.SensorIndicatorButton
 import com.example.smartoffice.test.TestDataRecordIndicator
 
 class Sensor {
-    var indicators = mutableListOf<SensorIndicator>()
+    private var indicators = mutableListOf<SensorIndicator>()
     var sensorID: String = ""
     var sensorName: String = ""
     val sensorContainer: SensorContainer
-    var sensorFavorite: Int = 0
     private var sensorButton: SensorButton? = null
     private var fragmentSensor: FragmentSensor? = null
     private var sensorIndicatorContainer: LinearLayout? = null
@@ -97,10 +96,5 @@ class Sensor {
         sensorButton?.refreshValue()
         fragmentSensor?.refreshHead()
         sensorContainer.onChangeSensor()
-    }
-
-    fun reverseSensorFavorite(){
-        this.sensorFavorite =  if (this.sensorFavorite == 0)  1 else 0
-        fragmentSensor?.refreshHead()
     }
 }
