@@ -25,6 +25,8 @@ class Sensor {
 
     fun setName(_sensorName:String){
         this.sensorName = _sensorName
+        sensorButton?.refreshAll()
+        fragmentSensor?.refreshHead()
     }
 
     fun setLinkToSensorButton(sensorButton: SensorButton){

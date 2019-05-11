@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             Log.i("SHOW CREATE",fragmentName)
             if (fragmentName.startsWith("FragmentSensor")) {
                 fragment = FragmentSensor.newInstance()
-                if (sensor!=null)  fragment.setSensor(sensor)
+                if (sensor != null) fragment.setSensor(sensor)
             }else{
                 when (fragmentName) {
                     "FragmentStart"         -> fragment = FragmentStart.newInstance()
@@ -53,11 +53,15 @@ class MainActivity : AppCompatActivity() {
                     "FragmentEnterCode"     -> fragment = FragmentEnterCode.newInstance()
                     "FragmentIDAddedFalse"  -> fragment = FragmentIDAddedFalse.newInstance()
                     "FragmentIDAddedOk"     -> fragment = FragmentIDAddedOk.newInstance()
-                    "FragmentSensorEdit"    -> fragment = FragmentSensorEdit.newInstance()
+                    "FragmentEditSensor"    -> fragment = FragmentEditSensor.newInstance()
 
                     else -> fragment = FragmentBlank.newInstance()
                 }
             }
+        }
+
+        if (fragmentName.startsWith("FragmentEditSensor")) {
+            (fragment as FragmentEditSensor).sensor = sensor
         }
 
         fragments[fragmentName]=fragment
@@ -99,13 +103,19 @@ class MainActivity : AppCompatActivity() {
                 "FragmentStart"         -> super.onBackPressed()
                 "FragmentScan"          -> this.fragmentsShow("FragmentStart")
                 "FragmentEnterCode"     -> this.fragmentsShow("FragmentScan")
+                "FragmentEditSensor"     -> {
+                    val fragmentEditSensor = fragments["FragmentEditSensor"] as FragmentEditSensor
+                    if (fragmentEditSensor != null) {
+                        val fragmentName = "FragmentSensor_${fragmentEditSensor.sensor?.sensorID}"
+                        this.fragmentsShow(fragmentName, fragmentEditSensor.sensor)
+                    }
+                }
                 else -> super.onBackPressed()
             }
         }
     }
 
     //StartFragment
-
     fun startFragmentScan(v: View) {
         Log.i("Button click", v.id.toString())
         this.fragmentsShow("FragmentScan")
@@ -144,5 +154,11 @@ class MainActivity : AppCompatActivity() {
             (application as SOApplication).sensorContainer.addSensor(strNewID)
             this.showStartScreen()
         }
+    }
+
+    //EditSensorFragment
+    fun sensorEditBack(v: View) {
+        Log.i("Button click", v.id.toString())
+        this.onBackPressed()
     }
 }

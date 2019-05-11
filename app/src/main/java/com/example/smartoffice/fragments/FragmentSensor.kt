@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.smartoffice.MainActivity
 
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
@@ -20,6 +22,8 @@ class FragmentSensor : FragmentParent() {
 
     private var imageViewFace: ImageView? = null
     private var textViewAlarm: TextView? = null
+
+    private var buttonEdit: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +54,13 @@ class FragmentSensor : FragmentParent() {
 
         this.sensor?.setLinkToFragmentSensor(this, view.findViewById(R.id.SensorIndicatorContainer))
 
+        val onClickListenerEdit = View.OnClickListener { _ ->
+            (activity as MainActivity).fragmentsShow("FragmentEditSensor", this.sensor)
+        }
+
+        this.buttonEdit = view.findViewById(R.id.imageView_star)
+        this.buttonEdit?.setOnClickListener(onClickListenerEdit)
+
         Log.i("SHOW","on onViewCreated ${this.sensor?.sensorID}")
     }
 
@@ -75,6 +86,9 @@ class FragmentSensor : FragmentParent() {
 
     fun setSensor(_sensor:Sensor){
         this.sensor = _sensor
+
+
+
         this.refreshHead()
     }
 

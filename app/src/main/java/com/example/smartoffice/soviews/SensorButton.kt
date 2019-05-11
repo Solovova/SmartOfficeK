@@ -105,7 +105,7 @@ class SensorButton: ConstraintLayout {
         }
     }
 
-    private fun refreshAll() {
+    fun refreshAll() {
         val sensor = this.sensor
         if (sensor != null) {
             textMain.text = sensor.sensorName
