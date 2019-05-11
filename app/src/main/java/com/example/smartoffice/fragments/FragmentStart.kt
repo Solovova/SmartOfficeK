@@ -28,8 +28,6 @@ class FragmentStart : Fragment() {
         app.sensorContainer.setViewContainer(view.findViewById(R.id.container))
     }
 
-
-
     companion object {
 
         @JvmStatic

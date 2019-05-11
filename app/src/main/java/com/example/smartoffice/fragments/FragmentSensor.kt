@@ -60,13 +60,6 @@ class FragmentSensor : Fragment() {
             val textViewSensorName = this.textViewSensorName
             if (textViewSensorName != null) textViewSensorName.text = sensor.sensorName
 
-            val imageViewSensorFavorite = this.imageViewSensorFavorite
-            if (imageViewSensorFavorite != null) {
-                when(sensor.sensorFavorite) {
-                    0 -> imageViewSensorFavorite.setImageResource(R.drawable.ic_sensor_star_border)
-                    1 -> imageViewSensorFavorite.setImageResource(R.drawable.ic_sensor_star)
-                }
-            }
 
             val imageViewFace = this.imageViewFace
             val textViewAlarm = this.textViewAlarm

@@ -7,11 +7,8 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.ModalDialog
-import com.afollestad.materialdialogs.input.input
 import com.google.android.gms.vision.barcode.Barcode
 import com.example.smartoffice.R
 import com.notbytes.barcode_reader.BarcodeReaderFragment
@@ -20,37 +17,31 @@ import com.notbytes.barcode_reader.BarcodeReaderFragment
 class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
     private var barcodeReader: BarcodeReaderFragment? = null
     private var useFlash: Boolean = false
-    private var buttonInput: Button? = null
+    private var buttonFlash: ImageView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.useFlash = false
     }
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_scan, container, false)
         barcodeReader = childFragmentManager.findFragmentById(R.id.barcode_fragment) as BarcodeReaderFragment
         barcodeReader?.setListener(this)
 
-        val onClickListenerInput = View.OnClickListener { _ ->
-            val mContext = context
-            if (mContext != null){
-                MaterialDialog(mContext).show {
-                    input  ()
+        this.useFlash = false
 
-                        .autoDismissEnabled
-                    ModalDialog
-                    //positiveButton("Test")
-                }
+        val onClickListenerFlash = View.OnClickListener { _ ->
+            this.useFlash = !this.useFlash
+            barcodeReader?.setUseFlash(this.useFlash)
+            when (this.useFlash) {
+                false -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
+                true -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_on)
             }
-
-
-            return@OnClickListener
         }
-        this.buttonInput = view.findViewById(R.id.buttonInput)
-        this.buttonInput?.setOnClickListener(onClickListenerInput)
+
+        this.buttonFlash = view.findViewById(R.id.imageViewFlash)
+        this.buttonFlash?.setOnClickListener(onClickListenerFlash)
+
         return view
     }
 
@@ -83,11 +74,6 @@ class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
     override fun onCameraPermissionDenied() {
         Toast.makeText(activity, "Camera permission denied!", Toast.LENGTH_LONG).show()
     }
-
-//    fun switchFlash() {
-//        this.useFlash = !this.useFlash
-//        this.barcodeReader!!.setUseFlash(this.useFlash)
-//    }
 
     companion object {
         private val TAG = FragmentScan::class.java.simpleName

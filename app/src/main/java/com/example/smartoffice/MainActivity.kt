@@ -1,5 +1,6 @@
 package com.example.smartoffice
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,13 @@ import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.*
 import com.example.smartoffice.service.Sensor
+import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -92,8 +100,9 @@ class MainActivity : AppCompatActivity() {
             this.showStartScreen()
         }else{
             when (this.getActiveFragments()) {
-                "FragmentStart" -> super.onBackPressed()
-                "FragmentScan" -> this.fragmentsShow("FragmentStart")
+                "FragmentStart"         -> super.onBackPressed()
+                "FragmentScan"          -> this.fragmentsShow("FragmentStart")
+                "FragmentEnterCode"     -> this.fragmentsShow("FragmentScan")
                 else -> super.onBackPressed()
             }
         }
@@ -112,11 +121,21 @@ class MainActivity : AppCompatActivity() {
         this.onBackPressed()
     }
 
+    //ScanFragment
 
+    fun scanFragmentEnterCode(v: View) {
+        Log.i("Button click", v.id.toString())
+        this.fragmentsShow("FragmentEnterCode")
+    }
 
+    fun scanFragmentBack(v: View) {
+        Log.i("Button click", v.id.toString())
+        this.onBackPressed()
+    }
 
-
-
-
-
+    //EnterCodeFragment
+    fun sensorEnterCodeBack(v: View) {
+        Log.i("Button click", v.id.toString())
+        this.onBackPressed()
+    }
 }

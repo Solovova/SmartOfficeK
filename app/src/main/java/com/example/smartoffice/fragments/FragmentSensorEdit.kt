@@ -26,7 +26,7 @@ class FragmentSensorEdit : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FragmentBlank().apply {
+            FragmentSensorEdit().apply {
             }
     }
 }

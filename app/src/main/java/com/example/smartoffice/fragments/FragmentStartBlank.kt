@@ -26,7 +26,7 @@ class FragmentStartBlank : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FragmentBlank().apply {
+            FragmentStartBlank().apply {
             }
     }
 }

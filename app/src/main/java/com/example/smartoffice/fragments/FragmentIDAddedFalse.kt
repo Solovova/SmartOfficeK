@@ -26,7 +26,7 @@ class FragmentIDAddedFalse : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FragmentBlank().apply {
+            FragmentIDAddedFalse().apply {
             }
     }
 }
