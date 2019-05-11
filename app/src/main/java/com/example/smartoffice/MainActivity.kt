@@ -134,4 +134,15 @@ class MainActivity : AppCompatActivity() {
         Log.i("Button click", v.id.toString())
         this.onBackPressed()
     }
+
+    fun sensorEnterCodeOk(v: View) {
+        Log.i("Button click", v.id.toString())
+        val fragmentEnterCode = fragments["FragmentEnterCode"] as FragmentEnterCode
+        val textEdit = fragmentEnterCode?.textEdit
+        if (textEdit != null) {
+            val strNewID =  textEdit.text.toString()
+            (application as SOApplication).sensorContainer.addSensor(strNewID)
+            this.showStartScreen()
+        }
+    }
 }

@@ -11,25 +11,21 @@ import com.example.smartoffice.R
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.content.Context.INPUT_METHOD_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
 
 
 
 
 class FragmentEnterCode : FragmentParent() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    var textEdit: EditText? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_enter_code, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        this.textEdit = view.findViewById(R.id.textViewEdit)
         super.onViewCreated(view, savedInstanceState)
     }
-
     override fun onShow() {
         super.onShow()
         val mView = view
@@ -37,14 +33,13 @@ class FragmentEnterCode : FragmentParent() {
             Log.i("FRAGMENT_ENTER","ON SHOW VIEW = NULL")
         }else{
             Log.i("FRAGMENT_ENTER","ON SHOW VIEW != NULL")
-            val editText: EditText = mView.findViewById(R.id.textViewEdit) as EditText
-            editText.requestFocus()
+            textEdit?.requestFocus()
             val strDefaultText = "id"
-            editText.text = Editable.Factory.getInstance().newEditable(strDefaultText)
-            editText.setSelection(strDefaultText.length)
+            textEdit?.text = Editable.Factory.getInstance().newEditable(strDefaultText)
+            textEdit?.setSelection(strDefaultText.length)
             //Show keyboard
             val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+            imm?.showSoftInput(textEdit, InputMethodManager.SHOW_IMPLICIT)
         }
     }
 
@@ -57,8 +52,6 @@ class FragmentEnterCode : FragmentParent() {
             imm?.hideSoftInputFromWindow(fView.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
         }
     }
-
-
 
         companion object {
         @JvmStatic

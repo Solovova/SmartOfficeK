@@ -105,6 +105,13 @@ class SensorButton: ConstraintLayout {
                             this.buttonDel.x = this.onTouchListenerDownButtonStartPos - (this.onTouchListenerDownX - motionEvent.rawX)
                     }
                 }
+
+                MotionEvent.ACTION_CANCEL -> {
+                    Log.i("DRAG","ACTION_CANCEL")
+                    this.buttonDel.x = this.onTouchListenerDownButtonStartPos
+                }
+
+
             }
             return@OnTouchListener true
         }

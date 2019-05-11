@@ -194,4 +194,21 @@ class SensorContainer {
         sensors.remove(sensor.sensorID)
         this.createSensorButtons()
     }
+
+    fun addSensor(_id:String) : String {
+        if (sensors[_id] != null) return "Already exists"
+        var sensor = Sensor(_id, this)
+        sensor.setName(_id)
+
+        val testSensorIndicator = arrayOf(
+            EnumIndicatorsType.Temperature,
+            EnumIndicatorsType.Humidity,
+            EnumIndicatorsType.Brightness
+        )
+
+        sensor.testGenerateData(testSensorIndicator)
+        sensors[_id] = sensor
+        this.createSensorButtons()
+        return "OK"
+    }
 }
