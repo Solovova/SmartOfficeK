@@ -59,6 +59,13 @@ class SensorButton: ConstraintLayout {
         }
 
         this.buttonDel.setOnClickListener(onClickListenerDel)
+
+        val onClickListenerMain = OnClickListener { _ ->
+
+            return@OnClickListener
+        }
+
+        this.buttonMain.setOnClickListener(onClickListenerDel)
     }
 
 
