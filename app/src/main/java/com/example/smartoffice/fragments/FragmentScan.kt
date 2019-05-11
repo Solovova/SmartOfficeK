@@ -29,7 +29,7 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
 
         this.useFlash = false
 
-        val onClickListenerFlash = View.OnClickListener { _ ->
+        val onClickListenerFlash = View.OnClickListener {
             this.useFlash = !this.useFlash
             barcodeReader?.setUseFlash(this.useFlash)
             when (this.useFlash) {
@@ -42,6 +42,12 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
         this.buttonFlash?.setOnClickListener(onClickListenerFlash)
 
         return view
+    }
+
+    override fun onHide() {
+        super.onHide()
+        this.useFlash = false
+        barcodeReader?.setUseFlash(this.useFlash)
     }
 
     override fun onScanned(barcode: Barcode) {
@@ -59,7 +65,7 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
         }
 
         val finalCodes = codes
-        Toast.makeText(getActivity(), "Barcodes: $finalCodes", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "Barcodes: $finalCodes", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBitmapScanned(sparseArray: SparseArray<Barcode>) {

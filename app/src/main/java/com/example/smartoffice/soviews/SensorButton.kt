@@ -50,7 +50,7 @@ class SensorButton: ConstraintLayout {
         tmpImage = findViewById(R.id.imageView31)
         imgSmall.add(tmpImage)
 
-        val onClickListenerDel = OnClickListener { _ ->
+        val onClickListenerDel = OnClickListener {
             val sensor = this.sensor
             if (sensor != null) {
                 val sensorContainer = sensor.sensorContainer
@@ -62,7 +62,7 @@ class SensorButton: ConstraintLayout {
 
         this.buttonDel.setOnClickListener(onClickListenerDel)
 
-        val onClickListenerMain = OnClickListener { _ ->
+        val onClickListenerMain = OnClickListener {
             val sensor = this.sensor
             if (sensor!=null) {
                 val fragmentName = "FragmentSensor_${sensor.sensorID}"

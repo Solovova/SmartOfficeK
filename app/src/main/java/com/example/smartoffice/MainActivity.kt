@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             when (this.getActiveFragments()) {
                 "FragmentStart"         -> super.onBackPressed()
-                "FragmentScan"          -> this.fragmentsShow("FragmentStart")
+                "FragmentScan"          -> this.showStartScreen()
                 "FragmentEnterCode"     -> this.fragmentsShow("FragmentScan")
                 "FragmentEditSensor"     -> {
                     val fragmentEditSensor = fragments["FragmentEditSensor"] as FragmentEditSensor
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     fun sensorEnterCodeOk(v: View) {
         Log.i("Button click", v.id.toString())
         val fragmentEnterCode = fragments["FragmentEnterCode"] as FragmentEnterCode
-        val textEdit = fragmentEnterCode?.textEdit
+        val textEdit = fragmentEnterCode.textEdit
         if (textEdit != null) {
             val strNewID =  textEdit.text.toString()
             (application as SOApplication).sensorContainer.addSensor(strNewID)

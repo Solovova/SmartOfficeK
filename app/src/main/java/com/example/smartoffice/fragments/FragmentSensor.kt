@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.smartoffice.MainActivity
@@ -54,7 +53,7 @@ class FragmentSensor : FragmentParent() {
 
         this.sensor?.setLinkToFragmentSensor(this, view.findViewById(R.id.SensorIndicatorContainer))
 
-        val onClickListenerEdit = View.OnClickListener { _ ->
+        val onClickListenerEdit = View.OnClickListener {
             (activity as MainActivity).fragmentsShow("FragmentEditSensor", this.sensor)
         }
 

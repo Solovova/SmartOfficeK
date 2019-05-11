@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.smartoffice.R
-import com.example.smartoffice.SOApplication
 
 class FragmentStartBlank : FragmentParent() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +16,6 @@ class FragmentStartBlank : FragmentParent() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_start_blank, container, false)
     }
 

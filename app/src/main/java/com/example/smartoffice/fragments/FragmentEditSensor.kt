@@ -14,9 +14,9 @@ import android.widget.EditText
 import com.example.smartoffice.service.Sensor
 
 class FragmentEditSensor : FragmentParent() {
-    var textEdit: EditText? = null
+    private var textEdit: EditText? = null
     var sensor: Sensor? = null
-    var buttonOk: Button? = null
+    private var buttonOk: Button? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_sensor_edit, container, false)
@@ -42,7 +42,7 @@ class FragmentEditSensor : FragmentParent() {
                 val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
                 imm?.showSoftInput(textEdit, InputMethodManager.SHOW_IMPLICIT)
 
-                val onClickListenerOk = View.OnClickListener { _ ->
+                val onClickListenerOk = View.OnClickListener {
                     sensor.setName(textEdit?.text.toString())
                     activity?.onBackPressed()
                 }

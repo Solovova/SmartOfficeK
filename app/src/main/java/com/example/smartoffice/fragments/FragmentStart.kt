@@ -23,7 +23,7 @@ class FragmentStart : FragmentParent() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var app = activity?.application as SOApplication
+        val app = activity?.application as SOApplication
         app.sensorContainer.setViewContainer(view.findViewById(R.id.container))
     }
 

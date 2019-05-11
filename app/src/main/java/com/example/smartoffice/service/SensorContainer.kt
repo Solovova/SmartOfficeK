@@ -1,21 +1,19 @@
 package com.example.smartoffice.service
 
-import android.app.Application
 import android.widget.LinearLayout
 import com.example.smartoffice.dataclass.DataIndicatorTypeDef
 import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.R
 import android.os.SystemClock
-import android.view.View
 import com.example.smartoffice.SOApplication
 import com.example.smartoffice.test.TestDataFlow
 import com.example.smartoffice.test.TestDataRecordIndicator
 
 class SensorContainer {
-    var myThread: Thread? = null
+    private var myThread: Thread? = null
     var sensors = mutableMapOf<String,Sensor>()
-    var sensorIndicatorDef = mutableMapOf<EnumIndicatorsType,DataIndicatorTypeDef>()
+    private var sensorIndicatorDef = mutableMapOf<EnumIndicatorsType,DataIndicatorTypeDef>()
     private var viewContainer : LinearLayout? = null
     private var testDataFlow: TestDataFlow
 
@@ -124,7 +122,7 @@ class SensorContainer {
         val viewContainer = this.viewContainer
         if (viewContainer != null) {
             if (viewContainer.childCount > 0) viewContainer.removeAllViews()
-            var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
@@ -152,7 +150,7 @@ class SensorContainer {
         val testSensorID: Array<String> = arrayOf("id123432", "id999797", "id999997")
         val testSensorName: Array<String> = arrayOf("Room 8", "Room 2", "Room 7")
 
-        var testSensorIndicator = mutableMapOf<String,Array<EnumIndicatorsType>>()
+        val testSensorIndicator = mutableMapOf<String,Array<EnumIndicatorsType>>()
         testSensorIndicator[testSensorID[0]] = arrayOf(
             EnumIndicatorsType.Temperature,
             EnumIndicatorsType.Brightness,
@@ -181,7 +179,7 @@ class SensorContainer {
         }
     }
 
-    fun eventDataIn(testDataRecordIndicator: TestDataRecordIndicator) {
+    private fun eventDataIn(testDataRecordIndicator: TestDataRecordIndicator) {
         val sensor = this.sensors[testDataRecordIndicator.sensorId]
         sensor?.eventDataIn(testDataRecordIndicator)
     }
@@ -197,7 +195,7 @@ class SensorContainer {
 
     fun addSensor(_id:String) : String {
         if (sensors[_id] != null) return "Already exists"
-        var sensor = Sensor(_id, this)
+        val sensor = Sensor(_id, this)
         sensor.setName(_id)
 
         val testSensorIndicator = arrayOf(

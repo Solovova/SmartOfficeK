@@ -49,7 +49,7 @@ class Sensor {
         val sensorIndicatorContainer = this.sensorIndicatorContainer
         if (sensorIndicatorContainer != null) {
             if (sensorIndicatorContainer.childCount > 0) sensorIndicatorContainer.removeAllViews()
-            var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )

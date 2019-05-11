@@ -4,7 +4,6 @@ package com.example.smartoffice.soviews
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
