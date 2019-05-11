@@ -28,6 +28,12 @@ android {
 
 }
 
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -41,4 +47,5 @@ dependencies {
     implementation project(path: ':barcode-reader')
     implementation 'com.afollestad.material-dialogs:core:3.0.0-alpha1'
     implementation 'com.afollestad.material-dialogs:input:3.0.0-alpha1'
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 }

@@ -132,7 +132,7 @@ class SensorContainer {
                 val sensor: Sensor? = sensors[id]
                 if (sensor != null){
                     val newButton = SensorButton(viewContainer.context)
-                    params.setMargins(30, 0, 30, 0)
+                    params.setMargins(0, 0, 0, 0)
                     newButton.layoutParams = params
                     viewContainer.addView(newButton)
                     sensor.setLinkToSensorButton(newButton)

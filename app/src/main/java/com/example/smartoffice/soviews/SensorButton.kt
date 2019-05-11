@@ -3,13 +3,10 @@ package com.example.smartoffice.soviews
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 import com.example.smartoffice.dataclass.EnumIndicatorsType
@@ -22,11 +19,6 @@ class SensorButton: ConstraintLayout {
     private var sensor: Sensor? = null
     private var imgBig: MutableList<ImageView>
     private var imgSmall: MutableList<ImageView>
-
-    private var onTouchListenerDownX:Float = 0.0f
-    private var onTouchListenerDownButtonStartPos:Float = 0.0f
-    private var buttonDelShow:Boolean = false
-
 
     constructor(context: Context):super(context){
         inflate(context, R.layout.soview_sensor_button, this)
@@ -57,65 +49,6 @@ class SensorButton: ConstraintLayout {
         tmpImage = findViewById(R.id.imageView31)
         imgSmall.add(tmpImage)
 
-        val onTouchListener = OnTouchListener { _, motionEvent ->
-            when(motionEvent.action){
-                MotionEvent.ACTION_DOWN -> {
-                    //Log.i("DRAG","ACTION_DOWN ${motionEvent.rawX} ${motionEvent.rawY}")
-                    this.onTouchListenerDownX = motionEvent.rawX
-                    this.onTouchListenerDownButtonStartPos = this.buttonDel.x
-                }
-                MotionEvent.ACTION_UP -> {
-                    //Log.i("DRAG","ACTION_UP ${motionEvent.rawX} ${motionEvent.rawY}")
-                    if ((this.onTouchListenerDownX - motionEvent.rawX) > 20) {
-                        Log.i("DRAG","Slide left")
-                        if (!this.buttonDelShow) {
-                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos - this.buttonDel.width
-                            this.buttonDelShow = true
-                        }else{
-                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos
-                        }
-
-
-                    } else if ((this.onTouchListenerDownX - motionEvent.rawX) < -20) {
-                        Log.i("DRAG","Slide right")
-                        if (this.buttonDelShow) {
-                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos + this.buttonDel.width
-                            this.buttonDelShow = false
-                            refreshValue()
-                        }else{
-                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos
-                        }
-                    } else {
-                        Log.i("DRAG","Click")
-                        this.buttonDel.x = this.onTouchListenerDownButtonStartPos
-                        val sensor = this.sensor
-                        if (sensor!=null) {
-                            val fragmentName = "FragmentSensor_${sensor.sensorID}"
-                            (context as MainActivity).fragmentsShow(fragmentName, sensor)
-                        }
-                    }
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    Log.i("DRAG","ACTION_MOVE ${motionEvent.rawX} ${motionEvent.rawY}")
-                    if ((this.buttonDelShow && this.onTouchListenerDownX < motionEvent.rawX) ||
-                            (!this.buttonDelShow && this.onTouchListenerDownX > motionEvent.rawX)){
-
-                        hideAlarm()
-                        if ((this.onTouchListenerDownX - motionEvent.rawX) < this.buttonDel.width)
-                            this.buttonDel.x = this.onTouchListenerDownButtonStartPos - (this.onTouchListenerDownX - motionEvent.rawX)
-                    }
-                }
-
-                MotionEvent.ACTION_CANCEL -> {
-                    Log.i("DRAG","ACTION_CANCEL")
-                    this.buttonDel.x = this.onTouchListenerDownButtonStartPos
-                }
-
-
-            }
-            return@OnTouchListener true
-        }
-
         val onClickListenerDel = OnClickListener { _ ->
             val sensor = this.sensor
             if (sensor != null) {
@@ -125,27 +58,13 @@ class SensorButton: ConstraintLayout {
             return@OnClickListener
         }
 
-        this.buttonMain.setOnTouchListener(onTouchListener)
         this.buttonDel.setOnClickListener(onClickListenerDel)
     }
 
-    private fun hideAlarm() {
-        val sensor = this.sensor
 
-        if (sensor != null) {
-            var tImgBig: ImageView
-            var tImgSmall: ImageView
-            for (t_type in EnumIndicatorsType.values()) {
-                tImgBig = imgBig[t_type.ordinal]
-                tImgSmall = imgSmall[t_type.ordinal]
-                tImgBig.visibility = View.GONE
-                tImgSmall.visibility = View.GONE
-            }
-        }
-    }
 
     fun refreshValue() {
-        if (this.buttonDelShow) return
+
         val sensor = this.sensor
 
         if (sensor != null) {
