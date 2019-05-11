@@ -55,6 +55,7 @@ class SensorButton: ConstraintLayout {
             if (sensor != null) {
                 val sensorContainer = sensor.sensorContainer
                 sensorContainer.deleteSensor(sensor)
+                (context as MainActivity).showStartScreen()
             }
             return@OnClickListener
         }

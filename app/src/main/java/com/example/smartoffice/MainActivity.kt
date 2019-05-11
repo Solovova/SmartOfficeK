@@ -89,8 +89,11 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    private fun showStartScreen() {
-        this.fragmentsShow("FragmentStart")
+    fun showStartScreen() {
+        when ((application as SOApplication).sensorContainer.sensors.isEmpty()) {
+            true -> this.fragmentsShow("FragmentStartBlank")
+            false -> this.fragmentsShow("FragmentStart")
+        }
     }
 
     override fun onBackPressed() {

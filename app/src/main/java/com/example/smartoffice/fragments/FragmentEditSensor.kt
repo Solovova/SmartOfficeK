@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.smartoffice.service.Sensor
 
-
 class FragmentEditSensor : FragmentParent() {
     var textEdit: EditText? = null
     var sensor: Sensor? = null
