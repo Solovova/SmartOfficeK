@@ -1,7 +1,6 @@
 package com.example.smartoffice.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import com.example.smartoffice.R
 import com.notbytes.barcode_reader.BarcodeReaderFragment
 
 
-class FragmentScan : Fragment(), BarcodeReaderFragment.BarcodeReaderListener {
+class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListener {
     private var barcodeReader: BarcodeReaderFragment? = null
     private var useFlash: Boolean = false
     private var buttonFlash: ImageView? = null

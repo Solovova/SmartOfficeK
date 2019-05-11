@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.smartoffice.R
 
 
-class FragmentBlank : Fragment() {
+class FragmentBlank : FragmentParent() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

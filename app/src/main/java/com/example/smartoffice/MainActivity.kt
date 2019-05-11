@@ -1,25 +1,17 @@
 package com.example.smartoffice
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.*
 import com.example.smartoffice.service.Sensor
-import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
-import android.content.Context.INPUT_METHOD_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-
 
 
 class MainActivity : AppCompatActivity() {
 
     //SwipeLayout
-    private var fragments = mutableMapOf<String, Fragment?>()
+    private var fragments = mutableMapOf<String, FragmentParent?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +32,13 @@ class MainActivity : AppCompatActivity() {
         //hide all fragments
         for ((key, value)  in fragments) {
             if (value != null)
-                if (key.compareTo(fragmentName)  != 0) ft.hide(value)
+                if (key.compareTo(fragmentName)  != 0 && value.isVisible) {
+                    ft.hide(value)
+                    value.onHide()
+                }
         }
 
-        var fragment: Fragment? =  fragments[fragmentName]
+        var fragment: FragmentParent? =  fragments[fragmentName]
 
         if (fragment == null ) {
             Log.i("SHOW CREATE",fragmentName)
@@ -72,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             ft.add(R.id.container, fragment, fragmentName)
         }
         ft.show(fragment)
+        fragment.onShow()
 
 
         ft.commit()

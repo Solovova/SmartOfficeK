@@ -3,7 +3,6 @@
 package com.example.smartoffice.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import android.widget.TextView
 import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 
-class FragmentSensor : Fragment() {
+class FragmentSensor : FragmentParent() {
     private var sensor:Sensor? = null
     private var textViewSensorName: TextView? = null
     private var imageViewSensorFavorite: ImageView? = null

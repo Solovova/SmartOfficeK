@@ -2,22 +2,22 @@ package com.example.smartoffice.fragments
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.example.smartoffice.R
-import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import android.widget.EditText
-import kotlin.coroutines.coroutineContext
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
 
 
-class FragmentEnterCode : Fragment() {
+
+
+class FragmentEnterCode : FragmentParent() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -30,20 +30,37 @@ class FragmentEnterCode : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.i("FRAGMENT_ENTER","RESUME")
-//        val editText = view?.findViewById(R.id.textViewEdit) as EditText
-//        editText?.requestFocus()
-//
-//        //Show keyboard
-//        val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-//        imm?.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+    override fun onShow() {
+        super.onShow()
+        val mView = view
+        if (mView == null) {
+            Log.i("FRAGMENT_ENTER","ON SHOW VIEW = NULL")
+        }else{
+            Log.i("FRAGMENT_ENTER","ON SHOW VIEW != NULL")
+            val editText: EditText = mView.findViewById(R.id.textViewEdit) as EditText
+            editText.requestFocus()
+            val strDefaultText = "id"
+            editText.text = Editable.Factory.getInstance().newEditable(strDefaultText)
+            editText.setSelection(strDefaultText.length)
+            //Show keyboard
+            val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    override fun onHide() {
+        super.onHide()
+        val mView = view
+        if (mView != null) {
+            val fView = mView.findFocus()
+            val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(fView.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        }
     }
 
 
 
-    companion object {
+        companion object {
         @JvmStatic
         fun newInstance() =
             FragmentEnterCode().apply {
