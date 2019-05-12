@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         fragment.onShow()
 
         ft.commit()
+
     }
 
     fun getActiveFragments(): String {

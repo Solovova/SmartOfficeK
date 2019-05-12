@@ -2,6 +2,7 @@ package com.example.smartoffice.fragments
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,8 @@ class FragmentSensorIndicatorInfo : FragmentParent() {
                 // Set value
                 val textRect1 = mView.findViewById(R.id.textRect1) as ImageView
                 val param = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
-
+                //val param = textRect1.layoutParams as ConstraintLayout.LayoutParams
+                //Log.i("FERROR",sensorIndicator.getAlarmCode().toString())
                 when (sensorIndicator.getAlarmCode()) {
                     0 -> {
                         param.startToStart = R.id.bar0
