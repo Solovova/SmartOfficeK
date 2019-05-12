@@ -10,7 +10,7 @@ import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.SensorIndicator
 
-class SensorIndicatorButton: ConstraintLayout {
+class SensorIndicatorButton(context: Context) : ConstraintLayout(context) {
     private var visualTextViewUp: TextView
     private var visualImageBig: ImageView
     private var visualAlarmImage: ImageView
@@ -21,7 +21,7 @@ class SensorIndicatorButton: ConstraintLayout {
 
     private var sensorIndicator: SensorIndicator? = null
 
-    constructor(context: Context):super(context){
+    init {
         inflate(context, R.layout.soview_sensor_indicator_button, this)
         this.visualTextViewUp = findViewById(R.id.textView_Up)
         this.visualImageBig = findViewById(R.id.imageView)

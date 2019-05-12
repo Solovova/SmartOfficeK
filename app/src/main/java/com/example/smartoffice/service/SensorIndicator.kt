@@ -7,14 +7,14 @@ import android.os.SystemClock
 import com.example.smartoffice.dataclass.DataIndicatorTypeDef
 
 
-class SensorIndicator  {
+class SensorIndicator(_type: EnumIndicatorsType, _sensor: Sensor) {
     private var indicatorValue: Double
     private var indicatorOldValue: Double
     private var indicatorValueTime: Long
     var dataIndicatorTypeDef: DataIndicatorTypeDef
 
-    var type: EnumIndicatorsType
-    val sensor: Sensor
+    var type: EnumIndicatorsType = _type
+    val sensor: Sensor = _sensor
 
 
     private var alarmBorder: Array<Double>
@@ -22,9 +22,7 @@ class SensorIndicator  {
 
     private var sensorIndicatorButton: SensorIndicatorButton? = null
 
-    constructor(_type: EnumIndicatorsType, _sensor: Sensor) {
-        this.sensor = _sensor
-        this.type = _type
+    init {
         this.dataIndicatorTypeDef =  _sensor.sensorContainer.getDataIndicatorTypeDef(this.type)
         this.alarmBorder = dataIndicatorTypeDef.defAlarmBorder.clone()
         this.indicatorValue = dataIndicatorTypeDef.defValue

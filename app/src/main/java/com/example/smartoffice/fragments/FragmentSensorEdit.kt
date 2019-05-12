@@ -2,7 +2,6 @@ package com.example.smartoffice.fragments
 
 import android.app.Activity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.smartoffice.MainActivity
-import com.example.smartoffice.service.Sensor
 
 class FragmentSensorEdit : FragmentParent() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

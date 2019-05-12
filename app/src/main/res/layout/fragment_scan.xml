@@ -68,7 +68,7 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:textAllCaps="false"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/colorSOBlack"
                 android:textStyle="bold"
                 android:fontFamily="@font/proximanova"

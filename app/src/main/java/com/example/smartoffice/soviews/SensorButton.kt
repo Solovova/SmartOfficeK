@@ -13,7 +13,7 @@ import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 import com.example.smartoffice.dataclass.EnumIndicatorsType
 
-class SensorButton: ConstraintLayout {
+class SensorButton(context: Context) : ConstraintLayout(context) {
     private var textMain: TextView
     private var buttonMain: Button
     private var buttonDel: Button
@@ -22,17 +22,14 @@ class SensorButton: ConstraintLayout {
     private var imgBig: MutableList<ImageView>
     private var imgSmall: MutableList<ImageView>
 
-    constructor(context: Context):super(context){
+    init {
         inflate(context, R.layout.soview_sensor_button, this)
         this.textMain = findViewById(R.id.textMain)
         this.buttonMain = findViewById(R.id.button)
         this.buttonDel = findViewById(R.id.buttonDel)
 
-
-        var tmpImage:ImageView
-
         imgBig= mutableListOf()
-        tmpImage = findViewById(R.id.imageView0)
+        var tmpImage:ImageView =  findViewById(R.id.imageView0)
         imgBig.add(tmpImage)
         tmpImage = findViewById(R.id.imageView1)
         imgBig.add(tmpImage)
@@ -40,7 +37,6 @@ class SensorButton: ConstraintLayout {
         imgBig.add(tmpImage)
         tmpImage = findViewById(R.id.imageView3)
         imgBig.add(tmpImage)
-
         imgSmall= mutableListOf()
         tmpImage = findViewById(R.id.imageView01)
         imgSmall.add(tmpImage)
@@ -50,7 +46,6 @@ class SensorButton: ConstraintLayout {
         imgSmall.add(tmpImage)
         tmpImage = findViewById(R.id.imageView31)
         imgSmall.add(tmpImage)
-
         val onClickListenerDel = OnClickListener {
             val sensor = this.sensor
             if (sensor != null) {
@@ -60,14 +55,11 @@ class SensorButton: ConstraintLayout {
             }
             return@OnClickListener
         }
-
         this.buttonDel.setOnClickListener(onClickListenerDel)
-
         val onClickListenerMain = OnClickListener {
             (context as MainActivity).fragmentsShow("FragmentSensor", sensor = sensor)
             return@OnClickListener
         }
-
         this.buttonMain.setOnClickListener(onClickListenerMain)
     }
 

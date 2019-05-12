@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
         val textEdit = fragmentEnterCode.textEdit
         if (textEdit != null) {
             val strNewID =  textEdit.text.toString()
-            var strResult = (application as SOApplication).sensorContainer.addSensor(strNewID)
+            val strResult = (application as SOApplication).sensorContainer.addSensor(strNewID)
             if (strResult.contentEquals("OK")) {
                 this.fragmentsShow("FragmentIDAddedOk", strData = strNewID)
             }else{

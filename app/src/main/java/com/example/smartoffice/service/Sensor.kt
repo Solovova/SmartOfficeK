@@ -7,21 +7,15 @@ import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.soviews.SensorIndicatorButton
 import com.example.smartoffice.test.TestDataRecordIndicator
 
-class Sensor {
+class Sensor(_sensorID: String, _sensorContainer: SensorContainer) {
     private var indicators = mutableListOf<SensorIndicator>()
-    var sensorID: String = ""
+    var sensorID: String = _sensorID
     var sensorName: String = ""
-    val sensorContainer: SensorContainer
+    val sensorContainer: SensorContainer = _sensorContainer
     private var sensorButton: SensorButton? = null
     private var fragmentSensor: FragmentSensor? = null
     private var sensorIndicatorContainer: LinearLayout? = null
 
-
-
-    constructor(_sensorID: String, _sensorContainer: SensorContainer) {
-        this.sensorContainer = _sensorContainer
-        this.sensorID = _sensorID
-    }
 
     fun setName(_sensorName:String){
         this.sensorName = _sensorName

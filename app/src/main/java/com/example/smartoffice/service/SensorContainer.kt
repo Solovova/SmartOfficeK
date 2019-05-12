@@ -10,22 +10,17 @@ import com.example.smartoffice.SOApplication
 import com.example.smartoffice.test.TestDataFlow
 import com.example.smartoffice.test.TestDataRecordIndicator
 
-class SensorContainer {
+class SensorContainer(_app: SOApplication) {
     private var myThread: Thread? = null
     var sensors = mutableMapOf<String,Sensor>()
     private var sensorIndicatorDef = mutableMapOf<EnumIndicatorsType,DataIndicatorTypeDef>()
     private var viewContainer : LinearLayout? = null
-    private var testDataFlow: TestDataFlow
+    private var testDataFlow: TestDataFlow = TestDataFlow()
 
-    var app: SOApplication? = null
-    constructor(_app: SOApplication){
-        this.app = _app
-        this.testDataFlow = TestDataFlow()
+    var app: SOApplication? = _app
 
-        var tmpDataIndicatorTypeDef: DataIndicatorTypeDef
-
-        //Temperature
-        tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
+    init {
+        var tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
             defValue = 20.0
             defAlarmBorder          = arrayOf(19.0, 26.0)
@@ -42,8 +37,6 @@ class SensorContainer {
             defTextDescribe         = "\tDescribe for Temperature"
         }
         sensorIndicatorDef[EnumIndicatorsType.Temperature] = tmpDataIndicatorTypeDef
-
-        //Brightness
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
             defValue = 400.0
@@ -61,8 +54,6 @@ class SensorContainer {
             defTextDescribe         = "\tDescribe for Brightness"
         }
         sensorIndicatorDef[EnumIndicatorsType.Brightness] = tmpDataIndicatorTypeDef
-
-        //Co2
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
             defValue = 800.0
@@ -80,8 +71,6 @@ class SensorContainer {
             defTextDescribe         = "\tCarbon dioxide at levels that are unusually high indoors may cause occupants to grow drowsy, to get headaches, or to function at lower activity levels. \n \tOutdoor CO2 levels are usually 350-450 ppm whereas the maximum indoor CO2 level considered acceptable is 1000 ppm. Keep this value lowe as possible."
         }
         sensorIndicatorDef[EnumIndicatorsType.Co2] = tmpDataIndicatorTypeDef
-
-        //Humidity
         tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
             defValue = 50.0
@@ -99,13 +88,10 @@ class SensorContainer {
             defTextDescribe         = "\tDescribe for Humidity"
         }
         sensorIndicatorDef[EnumIndicatorsType.Humidity] = tmpDataIndicatorTypeDef
-
         this.myThread = Thread(
             Runnable {
                 while (true) {
-                    app?.mainActivity?.runOnUiThread( Runnable {
-                                                 this.eventDataIn(this.testDataFlow.getNextTestRecord())
-                    })
+                    app?.mainActivity?.runOnUiThread {this.eventDataIn(this.testDataFlow.getNextTestRecord())}
                     SystemClock.sleep(1000)
                 }
             }

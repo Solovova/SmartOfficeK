@@ -21,7 +21,7 @@
             android:textColor="@color/colorSOGrey"
             android:fontFamily="@font/proximanova"
 
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     <!--font 40-->
@@ -36,7 +36,7 @@
             android:text="30.16"
             android:textColor="@color/colorSOBlack"
 
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:typeface="normal"
             android:fontFamily="@font/proximanova"
             app:layout_constraintStart_toStartOf="@+id/textView_Up"
@@ -53,7 +53,7 @@
             android:layout_toEndOf="@+id/textView_0"
             android:text="℃"
             android:textColor="@color/colorSOGrey"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:fontFamily="@font/proximanova"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_0"
             app:layout_constraintStart_toEndOf="@+id/textView_0" />

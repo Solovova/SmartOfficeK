@@ -47,7 +47,7 @@
                 android:text=""
 
                 android:fontFamily="@font/proximanova"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textStyle="bold"
 
                 android:textColor="@color/colorSOBlack"
@@ -67,7 +67,7 @@
                 android:text="Ok"
                 android:textAllCaps="false"
                 android:textColor="@color/colorSOBlack"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
         />
     </LinearLayout>
@@ -79,7 +79,7 @@
             android:text="Enter name of sensor:"
 
             android:fontFamily="@font/proximanova"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
@@ -92,7 +92,7 @@
             android:text="ID:"
 
             android:fontFamily="@font/proximanova"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintLeft_toLeftOf="@+id/linearLayout"

@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.example.smartoffice.MainActivity
 
 import com.example.smartoffice.R
-import com.example.smartoffice.service.Sensor
 
 class FragmentSensor : FragmentParent() {
     private var textViewSensorName: TextView? = null
