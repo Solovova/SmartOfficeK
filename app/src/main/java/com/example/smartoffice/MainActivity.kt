@@ -106,10 +106,14 @@ class MainActivity : AppCompatActivity() {
             "FragmentSensorEdit"    -> {
                 val fragmentEditSensor = fragments["FragmentSensorEdit"]
                 this.fragmentsShow("FragmentSensor", sensor = fragmentEditSensor?.sensor)
+                //was some bug
+                fragments["FragmentSensorIndicatorInfo"] = null
             }
             "FragmentSensorIndicatorInfo"    -> {
+
                 val fragmentSensorInfo = fragments["FragmentSensorIndicatorInfo"]
                 this.fragmentsShow("FragmentSensor", sensor = fragmentSensorInfo?.sensorIndicator?.sensor)
+
             }
             else -> super.onBackPressed()
         }
