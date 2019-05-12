@@ -36,6 +36,17 @@
                     android:elevation="10dp"
             />
 
+            <TextView
+                    android:id="@+id/textViewExBut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Test"
+                    android:textColor="@color/colorSOYellow"
+                    android:fontFamily="@font/proximanova"
+                    android:elevation="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/textMain"
+                    app:layout_constraintTop_toBottomOf="@+id/textMain" />
+
             <ImageView
                     android:id="@+id/imageView0"
                     android:layout_width="30dp"

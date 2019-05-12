@@ -1,6 +1,7 @@
 package com.example.smartoffice.soviews
 
 import android.content.Context
+import android.text.Editable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import android.view.View
@@ -96,6 +97,16 @@ class SensorButton: ConstraintLayout {
                     }
                 }
             }
+
+            //Refresh describe
+            val tAlarmMain = sensor.getAlarmState()
+            val tHeadAlarm = arrayOf("Everything looks good","Poor","Unhealthy")
+            val tHeadColor = arrayOf(R.color.colorSOGreen,R.color.colorSOYellow,R.color.colorSORed)
+            val textViewExBut = findViewById<TextView>(R.id.textViewExBut)
+            textViewExBut.text = Editable.Factory.getInstance().newEditable(tHeadAlarm[tAlarmMain])
+            textViewExBut.setTextColor(ContextCompat.getColor(context, tHeadColor[tAlarmMain]))
+
+
         }
     }
 
