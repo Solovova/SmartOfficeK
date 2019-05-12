@@ -39,6 +39,7 @@ class SensorContainer {
             defFormatString         = "%.2f"
             defDescribeValue        = "℃"
             defDescribe             = "Temperature"
+            defTextDescribe         = "\tDescribe for Temperature"
         }
         sensorIndicatorDef[EnumIndicatorsType.Temperature] = tmpDataIndicatorTypeDef
 
@@ -57,6 +58,7 @@ class SensorContainer {
             defFormatString         = "%.0f"
             defDescribeValue        = "lx"
             defDescribe             = "Brightness"
+            defTextDescribe         = "\tDescribe for Brightness"
         }
         sensorIndicatorDef[EnumIndicatorsType.Brightness] = tmpDataIndicatorTypeDef
 
@@ -75,6 +77,7 @@ class SensorContainer {
             defFormatString         = "%.0f"
             defDescribeValue        = "ppm"
             defDescribe             = "Co2"
+            defTextDescribe         = "\tCarbon dioxide at levels that are unusually high indoors may cause occupants to grow drowsy, to get headaches, or to function at lower activity levels. \n \tOutdoor CO2 levels are usually 350-450 ppm whereas the maximum indoor CO2 level considered acceptable is 1000 ppm. Keep this value lowe as possible."
         }
         sensorIndicatorDef[EnumIndicatorsType.Co2] = tmpDataIndicatorTypeDef
 
@@ -93,6 +96,7 @@ class SensorContainer {
             defFormatString         = "%.0f"
             defDescribeValue        = "%"
             defDescribe             = "Humidity"
+            defTextDescribe         = "\tDescribe for Humidity"
         }
         sensorIndicatorDef[EnumIndicatorsType.Humidity] = tmpDataIndicatorTypeDef
 

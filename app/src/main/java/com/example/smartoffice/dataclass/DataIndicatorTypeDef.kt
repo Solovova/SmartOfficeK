@@ -13,4 +13,5 @@ class DataIndicatorTypeDef {
     var defFormatString: String = ""
     var defDescribeValue: String = ""
     var defDescribe: String = ""
+    var defTextDescribe: String = ""
 }

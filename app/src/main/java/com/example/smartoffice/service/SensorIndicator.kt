@@ -4,12 +4,14 @@ import com.example.smartoffice.soviews.SensorIndicatorButton
 import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.test.TestDataRecordIndicator
 import android.os.SystemClock
+import com.example.smartoffice.dataclass.DataIndicatorTypeDef
 
 
 class SensorIndicator  {
     private var indicatorValue: Double
     private var indicatorOldValue: Double
     private var indicatorValueTime: Long
+    var dataIndicatorTypeDef: DataIndicatorTypeDef
 
     var type: EnumIndicatorsType
     val sensor: Sensor
@@ -23,7 +25,7 @@ class SensorIndicator  {
     constructor(_type: EnumIndicatorsType, _sensor: Sensor) {
         this.sensor = _sensor
         this.type = _type
-        val dataIndicatorTypeDef =  _sensor.sensorContainer.getDataIndicatorTypeDef(this.type)
+        this.dataIndicatorTypeDef =  _sensor.sensorContainer.getDataIndicatorTypeDef(this.type)
         this.alarmBorder = dataIndicatorTypeDef.defAlarmBorder.clone()
         this.indicatorValue = dataIndicatorTypeDef.defValue
         this.indicatorOldValue = 0.0

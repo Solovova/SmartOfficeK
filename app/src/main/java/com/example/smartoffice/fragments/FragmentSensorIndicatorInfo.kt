@@ -26,8 +26,15 @@ class FragmentSensorIndicatorInfo : FragmentParent() {
         if (mView != null) {
             val sensorIndicator = this.sensorIndicator
             if (sensorIndicator != null) {
-                val textView0 = mView.findViewById(R.id.textView0) as TextView
-                textView0.text = Editable.Factory.getInstance().newEditable("ID: ${sensorIndicator.type.toString()}")
+                val topTxName = mView.findViewById(R.id.topTxName) as TextView
+                topTxName.text = Editable.Factory.getInstance().newEditable(sensorIndicator.type.toString())
+
+                val topImMain = mView.findViewById(R.id.topImMain) as ImageView
+                topImMain.setImageResource(sensorIndicator.dataIndicatorTypeDef.idBigPicture)
+
+                val topTxText = mView.findViewById(R.id.topTxText) as TextView
+                topTxText.text = Editable.Factory.getInstance().newEditable(sensorIndicator.dataIndicatorTypeDef.defTextDescribe)
+
 
                 val onClickListenerBack = View.OnClickListener {
                     (context as MainActivity).onBackPressed()

@@ -20,54 +20,159 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
-            android:layout_marginTop="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/buttonBack">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBack"
+            android:id="@+id/middleLayout"
+    >
 
 
         <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/fragment_start_blank_0"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/topImMain"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_sensor_co2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
+                />
 
         <TextView
-                android:id="@+id/textView0"
+                android:id="@+id/topTxName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Sensor info"
+                android:text="CO2 Level"
+                android:textSize="24dp"
+                android:textColor="@color/colorSOBlack"
+                android:textStyle="bold"
+                android:fontFamily="@font/proximanova"
+                app:layout_constraintEnd_toEndOf="@+id/topImMain"
+                app:layout_constraintStart_toStartOf="@+id/topImMain"
+                app:layout_constraintTop_toBottomOf="@+id/topImMain"/>
+
+        <TextView
+                android:id="@+id/topTxText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text=""
                 android:textSize="20dp"
                 android:textColor="@color/colorSOBlack"
                 android:textStyle="normal"
                 android:fontFamily="@font/proximanova"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <TextView
-                android:id="@+id/textView1"
+                app:layout_constraintEnd_toEndOf="@+id/topImMain"
+                app:layout_constraintStart_toStartOf="@+id/topImMain"
+                app:layout_constraintTop_toBottomOf="@+id/topTxName"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
+            app:layout_constraintTop_toBottomOf="@+id/middleLayout"
+            android:id="@+id/bottomLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+    >
+
+
+        <ImageView
+                android:id="@+id/textRect1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Sensor info"
-                android:textSize="20dp"
-                android:textColor="@color/colorSOBlack"
-                android:textStyle="bold"
-                android:fontFamily="@font/proximanova"
+                app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView0" />
+        <ImageView
+                android:id="@+id/bar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2_1"
+                app:layout_constraintTop_toBottomOf="@+id/textRect1"
+                app:layout_constraintStart_toStartOf="@+id/textRect1"
+                app:layout_constraintEnd_toEndOf="@+id/textRect1"/>
+
+        <ImageView
+                android:id="@+id/point1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_ellipse_2_1"
+                app:layout_constraintTop_toTopOf="@+id/bar1"
+                app:layout_constraintBottom_toBottomOf="@+id/bar1"
+                app:layout_constraintLeft_toRightOf="@+id/bar1"
+                />
+
+        <ImageView
+                android:id="@+id/point0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_ellipse_2_1"
+                app:layout_constraintTop_toTopOf="@+id/bar1"
+                app:layout_constraintBottom_toBottomOf="@+id/bar1"
+                app:layout_constraintRight_toLeftOf="@+id/bar1"
+        />
+
+        <ImageView
+                android:id="@+id/bar0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2_1"
+                app:layout_constraintTop_toTopOf="@+id/bar1"
+                app:layout_constraintRight_toLeftOf="@+id/point0"
+                />
+
+        <ImageView
+                android:id="@+id/bar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2_1"
+                app:layout_constraintTop_toTopOf="@+id/bar1"
+                app:layout_constraintLeft_toRightOf="@+id/point1"
+        />
+
+        <ImageView
+                android:id="@+id/face0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_face0_green"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/bar0"
+                app:layout_constraintRight_toRightOf="@+id/bar0"
+                app:layout_constraintLeft_toLeftOf="@+id/bar0"
+        />
+
+        <ImageView
+                android:id="@+id/face1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_face1_yellow"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/bar1"
+                app:layout_constraintRight_toRightOf="@+id/bar1"
+                app:layout_constraintLeft_toLeftOf="@+id/bar1"
+        />
+
+        <ImageView
+                android:id="@+id/face2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sensor_indicator_face2_red"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/bar2"
+                app:layout_constraintRight_toRightOf="@+id/bar2"
+                app:layout_constraintLeft_toLeftOf="@+id/bar2"
+        />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
