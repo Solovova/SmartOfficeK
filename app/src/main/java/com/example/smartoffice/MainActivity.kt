@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         fragment.onShow()
 
         ft.commit()
-
+        //supportFragmentManager.executePendingTransactions()
     }
 
     fun getActiveFragments(): String {
