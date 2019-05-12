@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 "FragmentIDAddedFalse" -> fragment = FragmentIDAddedFalse.newInstance()
                 "FragmentIDAddedOk" -> fragment = FragmentIDAddedOk.newInstance()
                 "FragmentSensorEdit" -> fragment = FragmentSensorEdit.newInstance()
+                "FragmentSensorInfo" -> fragment = FragmentSensorInfo.newInstance()
                 else -> fragment = FragmentBlank.newInstance()
             }
         }

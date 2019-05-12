@@ -22,10 +22,6 @@ class FragmentEnterCode : FragmentParent() {
         return inflater.inflate(R.layout.fragment_enter_code, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        this.textEdit = view.findViewById(R.id.textViewEdit)
-        super.onViewCreated(view, savedInstanceState)
-    }
     override fun onShow() {
         super.onShow()
         val mView = view
