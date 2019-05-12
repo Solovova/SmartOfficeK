@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.example.smartoffice.fragments.*
 import com.example.smartoffice.service.Sensor
+import com.example.smartoffice.service.SensorIndicator
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     //a?.equals(b) ?: (b === null)
-    fun fragmentsShow(fragmentName: String, sensor: Sensor? = null) {
+    fun fragmentsShow(fragmentName: String,
+                      sensor: Sensor? = null,
+                      sensorIndicator: SensorIndicator? = null,
+                      strData: String? = null) {
         Log.d("SHOW",fragmentName)
         val ft = supportFragmentManager.beginTransaction()
 
@@ -51,18 +55,17 @@ class MainActivity : AppCompatActivity() {
                 "FragmentIDAddedFalse" -> fragment = FragmentIDAddedFalse.newInstance()
                 "FragmentIDAddedOk" -> fragment = FragmentIDAddedOk.newInstance()
                 "FragmentSensorEdit" -> fragment = FragmentSensorEdit.newInstance()
-                "FragmentSensorInfo" -> fragment = FragmentSensorInfo.newInstance()
+                "FragmentSensorIndicatorInfo" -> fragment = FragmentSensorIndicatorInfo.newInstance()
                 else -> fragment = FragmentBlank.newInstance()
             }
         }
 
-        if (fragmentName.compareTo("FragmentSensorEdit") == 0) {
-            (fragment as FragmentSensorEdit).sensor = sensor
-        }
 
-        if (fragmentName.compareTo("FragmentSensor") == 0) {
-            (fragment as FragmentSensor).sensor = sensor
-        }
+        fragment.sensor = sensor
+        fragment.sensorIndicator = sensorIndicator
+        fragment.strData = strData
+
+
 
         fragments[fragmentName]=fragment
         if (!fragment.isAdded) ft.add(R.id.container, fragment, fragmentName)
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         ft.commit()
     }
 
-    private fun getActiveFragments(): String {
+    fun getActiveFragments(): String {
         var result = ""
         for ((_key, _fragment) in fragments) {
             if (_fragment != null && _fragment.isAdded && _fragment.isVisible) {
@@ -93,15 +96,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when (this.getActiveFragments()) {
-            "FragmentSensor" -> this.showStartScreen()
-            "FragmentStart" -> super.onBackPressed()
-            "FragmentScan" -> this.showStartScreen()
-            "FragmentEnterCode" -> this.fragmentsShow("FragmentScan")
-            "FragmentSensorEdit" -> {
-                val fragmentEditSensor = fragments["FragmentSensorEdit"] as FragmentSensorEdit
-                if (fragmentEditSensor != null) {
-                    this.fragmentsShow("FragmentSensor", fragmentEditSensor.sensor)
-                }
+            "FragmentSensor"        -> this.showStartScreen()
+            "FragmentStart"         -> super.onBackPressed()
+            "FragmentScan"          -> this.showStartScreen()
+            "FragmentIDAddedOk"     -> this.showStartScreen()
+            "FragmentIDAddedFalse"  -> this.showStartScreen()
+            "FragmentEnterCode"     -> this.fragmentsShow("FragmentScan")
+            "FragmentSensorEdit"    -> {
+                val fragmentEditSensor = fragments["FragmentSensorEdit"]
+                this.fragmentsShow("FragmentSensor", sensor = fragmentEditSensor?.sensor)
+            }
+            "FragmentSensorIndicatorInfo"    -> {
+                val fragmentSensorInfo = fragments["FragmentSensorIndicatorInfo"]
+                this.fragmentsShow("FragmentSensor", sensor = fragmentSensorInfo?.sensorIndicator?.sensor)
             }
             else -> super.onBackPressed()
         }
@@ -142,8 +149,12 @@ class MainActivity : AppCompatActivity() {
         val textEdit = fragmentEnterCode.textEdit
         if (textEdit != null) {
             val strNewID =  textEdit.text.toString()
-            (application as SOApplication).sensorContainer.addSensor(strNewID)
-            this.showStartScreen()
+            var strResult = (application as SOApplication).sensorContainer.addSensor(strNewID)
+            if (strResult.contentEquals("OK")) {
+                this.fragmentsShow("FragmentIDAddedOk", strData = strNewID)
+            }else{
+                this.fragmentsShow("FragmentIDAddedFalse", strData = strResult)
+            }
         }
     }
 }

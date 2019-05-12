@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 import com.example.smartoffice.service.SensorIndicator
 
@@ -68,6 +69,14 @@ class SensorIndicatorButton: ConstraintLayout {
     fun setSensorIndicator(_sensorIndicator: SensorIndicator) {
         if (this.sensorIndicator != _sensorIndicator) {
             this.sensorIndicator = _sensorIndicator
+
+            val ivMain = findViewById<ConstraintLayout>(R.id.ivMain)
+            val onClickListenerMain = OnClickListener {
+                (context as MainActivity).fragmentsShow("FragmentSensorIndicatorInfo", sensorIndicator = _sensorIndicator)
+                return@OnClickListener
+            }
+
+            ivMain.setOnClickListener(onClickListenerMain)
             this.refreshAll()
         }
     }

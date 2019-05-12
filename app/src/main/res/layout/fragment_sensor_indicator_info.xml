@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text=""
+                android:text="Sensor info"
                 android:textSize="20dp"
                 android:textColor="@color/colorSOBlack"
                 android:textStyle="normal"
@@ -54,9 +54,24 @@
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+        <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sensor info"
+                android:textSize="20dp"
+                android:textColor="@color/colorSOBlack"
+                android:textStyle="bold"
+                android:fontFamily="@font/proximanova"
 
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/textView0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,11 +81,11 @@
     >
 
         <Button
-                android:text="Try again"
+                android:text="Got it"
                 android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/buttonTry"
+                android:id="@+id/buttonOk"
                 android:textSize="18dp"
                 android:typeface="normal"
                 android:textStyle="bold"
@@ -79,7 +94,5 @@
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

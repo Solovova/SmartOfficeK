@@ -12,8 +12,6 @@ import com.example.smartoffice.R
 import com.example.smartoffice.service.Sensor
 
 class FragmentSensor : FragmentParent() {
-    var sensor:Sensor? = null
-
     private var textViewSensorName: TextView? = null
     private var imageViewSensorFavorite: ImageView? = null
 
@@ -44,7 +42,7 @@ class FragmentSensor : FragmentParent() {
             this.sensor?.setLinkToView(this, view.findViewById(R.id.SensorIndicatorContainer))
 
             val onClickListenerEdit = View.OnClickListener {
-                (activity as MainActivity).fragmentsShow("FragmentSensorEdit", this.sensor)
+                (activity as MainActivity).fragmentsShow("FragmentSensorEdit", sensor = this.sensor)
             }
 
             this.buttonEdit = view.findViewById(R.id.imageView_star)

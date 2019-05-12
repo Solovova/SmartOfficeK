@@ -63,7 +63,7 @@ class SensorButton: ConstraintLayout {
         this.buttonDel.setOnClickListener(onClickListenerDel)
 
         val onClickListenerMain = OnClickListener {
-            (context as MainActivity).fragmentsShow("FragmentSensor", sensor)
+            (context as MainActivity).fragmentsShow("FragmentSensor", sensor = sensor)
             return@OnClickListener
         }
 

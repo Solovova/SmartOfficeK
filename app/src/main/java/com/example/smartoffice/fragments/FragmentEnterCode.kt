@@ -29,6 +29,7 @@ class FragmentEnterCode : FragmentParent() {
             Log.i("FRAGMENT_ENTER","ON SHOW VIEW = NULL")
         }else{
             Log.i("FRAGMENT_ENTER","ON SHOW VIEW != NULL")
+            this.textEdit = mView.findViewById(R.id.textViewEdit)
             textEdit?.requestFocus()
             val strDefaultText = "id"
             textEdit?.text = Editable.Factory.getInstance().newEditable(strDefaultText)
@@ -51,8 +52,6 @@ class FragmentEnterCode : FragmentParent() {
 
         companion object {
         @JvmStatic
-        fun newInstance() =
-            FragmentEnterCode().apply {
-            }
+        fun newInstance() = FragmentEnterCode()
     }
 }
