@@ -87,9 +87,24 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintStart_toStartOf="@+id/bar1"
+                app:layout_constraintEnd_toEndOf="@+id/bar1"/>
+
+        <TextView
+                android:id="@+id/topTxValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1800 ppm"
+                android:textSize="14dp"
+                android:textColor="@color/colorSOBlack"
+                android:textStyle="bold"
+                android:fontFamily="@font/proximanova"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/textRect1"
+                app:layout_constraintStart_toStartOf="@+id/textRect1"
+                app:layout_constraintTop_toTopOf="@+id/textRect1"
+                app:layout_constraintBottom_toBottomOf="@+id/textRect1"
+        />
 
         <ImageView
                 android:id="@+id/bar1"
@@ -97,8 +112,8 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_sensor_indicator_rectangle_2_1"
                 app:layout_constraintTop_toBottomOf="@+id/textRect1"
-                app:layout_constraintStart_toStartOf="@+id/textRect1"
-                app:layout_constraintEnd_toEndOf="@+id/textRect1"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
                 android:id="@+id/point1"

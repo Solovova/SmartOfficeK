@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.smartoffice.MainActivity
 import com.example.smartoffice.R
 
@@ -34,6 +35,33 @@ class FragmentSensorIndicatorInfo : FragmentParent() {
 
                 val topTxText = mView.findViewById(R.id.topTxText) as TextView
                 topTxText.text = Editable.Factory.getInstance().newEditable(sensorIndicator.dataIndicatorTypeDef.defTextDescribe)
+                // Set value
+                val textRect1 = mView.findViewById(R.id.textRect1) as ImageView
+                val param = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+
+                when (sensorIndicator.getAlarmCode()) {
+                    0 -> {
+                        param.startToStart = R.id.bar0
+                        param.endToEnd = R.id.bar0
+                    }
+                    1 -> {
+                        param.startToStart = R.id.bar1
+                        param.endToEnd = R.id.bar1
+                    }
+                    2 -> {
+                        param.startToStart = R.id.bar2
+                        param.endToEnd = R.id.bar2
+                    }
+                }
+
+                textRect1.layoutParams = param
+
+                val topTxValue = mView.findViewById(R.id.topTxValue) as TextView
+                val dataIndicatorTypeDef =  sensorIndicator.sensor.sensorContainer.getDataIndicatorTypeDef(sensorIndicator.type)
+                val strValue = "${String.format(dataIndicatorTypeDef.defFormatString, sensorIndicator.getIndicatorValue())} ${dataIndicatorTypeDef.defDescribeValue}"
+
+                topTxValue.text = Editable.Factory.getInstance().newEditable(strValue)
+                //END Set value
 
 
                 val onClickListenerBack = View.OnClickListener {
