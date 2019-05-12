@@ -57,8 +57,7 @@ class FragmentSensorIndicatorInfo : FragmentParent() {
                 textRect1.layoutParams = param
 
                 val topTxValue = mView.findViewById(R.id.topTxValue) as TextView
-                val dataIndicatorTypeDef =  sensorIndicator.sensor.sensorContainer.getDataIndicatorTypeDef(sensorIndicator.type)
-                val strValue = "${String.format(dataIndicatorTypeDef.defFormatString, sensorIndicator.getIndicatorValue())} ${dataIndicatorTypeDef.defDescribeValue}"
+                val strValue = "${String.format(sensorIndicator.dataIndicatorTypeDef.defFormatString, sensorIndicator.getIndicatorValue())} ${sensorIndicator.dataIndicatorTypeDef.defDescribeValue}"
 
                 topTxValue.text = Editable.Factory.getInstance().newEditable(strValue)
                 //END Set value

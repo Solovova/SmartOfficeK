@@ -35,22 +35,21 @@ class SensorIndicatorButton: ConstraintLayout {
     fun refreshValue() {
         val sensorIndicator = this.sensorIndicator
         if (sensorIndicator != null) {
-            val dataIndicatorTypeDef =  sensorIndicator.sensor.sensorContainer.getDataIndicatorTypeDef(sensorIndicator.type)
-            visualTextValue.text = String.format(dataIndicatorTypeDef.defFormatString, sensorIndicator.getIndicatorValue())
+            visualTextValue.text = String.format(sensorIndicator.dataIndicatorTypeDef.defFormatString, sensorIndicator.getIndicatorValue())
             val alarmCode = sensorIndicator.getAlarmCode()
             if (alarmCode != 0) {
                 this.visualAlarmImage.visibility = View.VISIBLE
                 this.visualAlarmText.visibility = View.VISIBLE
                 this.visualAlarmTextEx.visibility = View.GONE
-                this.visualAlarmText.setTextColor(ContextCompat.getColor(context, dataIndicatorTypeDef.defTextAlarmIdColor[alarmCode]))
-                this.visualAlarmText.text = dataIndicatorTypeDef.defTextAlarm[alarmCode]
-                this.visualAlarmImage.setBackgroundResource(dataIndicatorTypeDef.defTextAlarmIdImage[alarmCode])
+                this.visualAlarmText.setTextColor(ContextCompat.getColor(context, sensorIndicator.dataIndicatorTypeDef.defTextAlarmIdColor[alarmCode]))
+                this.visualAlarmText.text = sensorIndicator.dataIndicatorTypeDef.defTextAlarm[alarmCode]
+                this.visualAlarmImage.setBackgroundResource(sensorIndicator.dataIndicatorTypeDef.defTextAlarmIdImage[alarmCode])
             }else{
                 this.visualAlarmImage.visibility = View.GONE
                 this.visualAlarmText.visibility = View.GONE
                 this.visualAlarmTextEx.visibility = View.VISIBLE
-                this.visualAlarmTextEx.setTextColor(ContextCompat.getColor(context, dataIndicatorTypeDef.defTextAlarmIdColor[alarmCode]))
-                this.visualAlarmTextEx.text = dataIndicatorTypeDef.defTextAlarm[alarmCode]
+                this.visualAlarmTextEx.setTextColor(ContextCompat.getColor(context, sensorIndicator.dataIndicatorTypeDef.defTextAlarmIdColor[alarmCode]))
+                this.visualAlarmTextEx.text = sensorIndicator.dataIndicatorTypeDef.defTextAlarm[alarmCode]
             }
         }
     }
