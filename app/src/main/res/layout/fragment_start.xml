@@ -66,19 +66,36 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
     >
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+            <Button
+                    android:text="Start"
+                    android:textAllCaps="false"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonSignalR"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/proximanova"
+                    android:onClick="startFragmentScan"
+            />
 
-        <Button
-                android:text="Add Device"
-                android:textAllCaps="false"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/button"
-                android:textSize="18sp"
-                android:typeface="normal"
-                android:textStyle="bold"
-                android:fontFamily="@font/proximanova"
-                android:onClick="startFragmentScan"
-        />
+            <Button
+                    android:text="Add Device"
+                    android:textAllCaps="false"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/proximanova"
+                    android:onClick="startFragmentScan"
+            />
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

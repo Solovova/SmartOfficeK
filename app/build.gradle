@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
     tasks.withType(JavaCompile) {
         sourceCompatibility = "1.8"
         targetCompatibility = "1.8"
@@ -48,4 +52,5 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.0.0-alpha1'
     implementation 'com.afollestad.material-dialogs:input:3.0.0-alpha1'
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+    implementation 'com.microsoft.signalr:signalr:1.0.0'
 }

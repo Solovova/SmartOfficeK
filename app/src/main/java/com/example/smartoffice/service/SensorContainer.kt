@@ -6,9 +6,15 @@ import com.example.smartoffice.dataclass.EnumIndicatorsType
 import com.example.smartoffice.soviews.SensorButton
 import com.example.smartoffice.R
 import android.os.SystemClock
+import android.util.Log
 import com.example.smartoffice.SOApplication
 import com.example.smartoffice.test.TestDataFlow
 import com.example.smartoffice.test.TestDataRecordIndicator
+import com.microsoft.signalr.HubConnection
+import com.microsoft.signalr.HubConnectionBuilder
+import com.microsoft.signalr.HubConnectionState
+import java.lang.Exception
+
 
 class SensorContainer(_app: SOApplication) {
     private var myThread: Thread? = null
@@ -19,7 +25,40 @@ class SensorContainer(_app: SOApplication) {
 
     var app: SOApplication? = _app
 
+    //hubConnection
+    var hubConnection: HubConnection? = null
+
     init {
+        //hub connection
+        hubConnection = HubConnectionBuilder.create("http://10.0.2.2:5000/movehub").build()
+        val mHubConnection = this.hubConnection
+        if (mHubConnection != null) {
+//            if (hubConnection.connectionState === HubConnectionState.DISCONNECTED) {
+//                hubConnection.start()
+//            }
+
+
+        }
+
+//        hubConnection?.on("ReceiveNewPositions", { mID, mIndicator, mValue ->
+//            Log.i("RECEIVE",mID)
+//            //val testDataRecordIndicator = TestDataRecordIndicator(mID,EnumIndicatorsType.values()[mIndicator],mValue.toDouble())
+//            //app?.mainActivity?.runOnUiThread {this.eventDataIn(testDataRecordIndicator)}
+//        }, String::class.java, Int::class.java, Float::class.java)
+
+        hubConnection?.on("ReceiveNewPositions", { mID:String, mIndicator:String, mValue:String->
+            try{
+                Log.i("RECEIVE","$mID  $mIndicator $mValue")
+                val mtIndicator = mIndicator.toInt()
+                val mtValue = mValue.toFloat()
+                val testDataRecordIndicator = TestDataRecordIndicator(mID,EnumIndicatorsType.values()[mtIndicator],mtValue.toDouble())
+                app?.mainActivity?.runOnUiThread {this.eventDataIn(testDataRecordIndicator)}
+            }catch (e: Exception){}
+
+        }, String::class.java, String::class.java , String::class.java)
+
+
+        //end hub connection
         var tmpDataIndicatorTypeDef = DataIndicatorTypeDef()
         with(tmpDataIndicatorTypeDef) {
             defValue = 20.0
@@ -91,7 +130,25 @@ class SensorContainer(_app: SOApplication) {
         this.myThread = Thread(
             Runnable {
                 while (true) {
-                    app?.mainActivity?.runOnUiThread {this.eventDataIn(this.testDataFlow.getNextTestRecord())}
+                    val mHubConnection = this.hubConnection
+                    if (mHubConnection != null) {
+                        if (mHubConnection.connectionState === HubConnectionState.DISCONNECTED) {
+                            Log.i("RECEIVE", "DISCONNECTED")
+                        }
+                        if (mHubConnection.connectionState === HubConnectionState.CONNECTED) {
+                            Log.i("RECEIVE", "CONNECTED")
+                        }
+                    }
+
+
+//                    val mHubConnection = this.hubConnection
+//                    if (mHubConnection != null) {
+//                        if (mHubConnection.connectionState === HubConnectionState.DISCONNECTED)
+//                            app?.mainActivity?.runOnUiThread {this.eventDataIn(this.testDataFlow.getNextTestRecord())}
+//                    }else{
+//                        app?.mainActivity?.runOnUiThread {this.eventDataIn(this.testDataFlow.getNextTestRecord())}
+//                    }
+
                     SystemClock.sleep(1000)
                 }
             }
