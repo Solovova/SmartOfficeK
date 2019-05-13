@@ -33,12 +33,19 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
 
 
             val onClickListenerFlash = View.OnClickListener {
-                this.useFlash = !this.useFlash
-                barcodeReader?.setUseFlash(this.useFlash)
-                when (this.useFlash) {
-                    false -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
-                    true -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_on)
+
+                try {
+                    this.useFlash = !this.useFlash
+                    barcodeReader?.setUseFlash(this.useFlash)
+                    when (this.useFlash) {
+                        false -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_off)
+                        true -> this.buttonFlash?.setImageResource(R.drawable.ic_fragment_qr_flash_on)
+                    }
+                }catch (e: Exception){
+                    this.useFlash = false
                 }
+
+
             }
 
             this.buttonFlash = view.findViewById(R.id.imageViewFlash)
@@ -49,8 +56,12 @@ class FragmentScan : FragmentParent(), BarcodeReaderFragment.BarcodeReaderListen
 
     override fun onHide() {
         super.onHide()
-        this.useFlash = false
-        barcodeReader?.setUseFlash(this.useFlash)
+        try {
+            this.useFlash = false
+            barcodeReader?.setUseFlash(this.useFlash)
+        }catch (e : java.lang.Exception) {
+        }
+
     }
 
     override fun onScanned(barcode: Barcode) {

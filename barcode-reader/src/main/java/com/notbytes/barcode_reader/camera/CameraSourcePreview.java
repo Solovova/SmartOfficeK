@@ -1,8 +1,8 @@
-
 package com.notbytes.barcode_reader.camera;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import androidx.annotation.RequiresPermission;
 import android.util.AttributeSet;
@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 
+import androidx.core.content.ContextCompat;
 import com.google.android.gms.common.images.Size;
 
 import java.io.IOException;
@@ -171,11 +172,15 @@ public class CameraSourcePreview extends ViewGroup {
         }
 
         try {
+            if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
             startIfReady();
         } catch (IOException e) {
             Log.e(TAG, "Could not start camera source.", e);
         }
     }
+
 
     private boolean isPortraitMode() {
         int orientation = mContext.getResources().getConfiguration().orientation;
